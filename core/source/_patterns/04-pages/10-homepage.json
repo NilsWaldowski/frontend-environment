@@ -1,0 +1,6 @@
+{
+	"bodytext": {
+		"short": "Dies wäre nun ein realer Text für eine Bildunterschrift, die nur 1x gepflegt werden muss",
+		"long": "Hier haben wir nun den langen Bodytext für diese Page überschrieben. Auf diese Weise lassen sich mit globaler-Seiten-Struktur auch differenzierte Seiten mit eigenem Content erzeugen. So können wir dem Kunden z.B. vers. Unterseiten mit unterschiedlichem Content aber nur einem Gerüst zeigen!"
+	}
+}
