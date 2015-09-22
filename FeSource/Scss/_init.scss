@@ -1,0 +1,54 @@
+// Mixin & function libraries
+// ------------------------------------------------
+// Vendor
+@import "../../node_modules/susy/sass/susy";
+@import "base/normalize";
+/**
+ * CPS-IT Framework
+ * ------------------------------------------------
+ */
+@import "base/variables";
+@import "base/mixins";
+@import "base/globals";
+// Elements
+// ------------------------------------------------
+// RTE Elements are imported within /css/scss/rte.scss (which is imported in the screen.css also)
+// Modules
+// ce -> custom elements, g -> global styles for ext
+// ------------------------------------------------
+@import "modules/menu_breadcrumb";
+@import "modules/menu_footer";
+@import "modules/menu_main";
+@import "modules/menu_main_mobile";
+@import "modules/menu_meta";
+@import "modules/menu_totop";
+@import "modules/ce_linklist";
+@import "modules/ce_teaser";
+@import "modules/g_forms";
+@import "modules/g_cockpit";
+@import "modules/g_datepicker";
+@import "modules/g_pagination";
+// Prototyping
+// ------------------------------------------------
+@import "prototyping/beautons";
+@import "prototyping/block-list";
+@import "prototyping/breadcrumb";
+@import "prototyping/columns";
+@import "prototyping/greybox";
+@import "prototyping/nav";
+@import "prototyping/pagination";
+@import "prototyping/split";
+@import "prototyping/table-cell";
+// Utilities
+// ------------------------------------------------
+@import "utilities/grid";
+@import "utilities/icons";
+// Page Layouts (i.e. Home, Sub1, Sub2 etc.)
+// ------------------------------------------------
+@import "views/page_header";
+@import "views/page_content";
+@import "views/page_footer";
+@import "views/page_home";
+
+// TYPO3 Extensions
+// ------------------------------------------------

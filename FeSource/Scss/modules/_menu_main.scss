@@ -1,0 +1,15 @@
+.b-mMenu-trigger {
+	display: none;
+
+	@include bp(medium-small) {
+		display: block;
+	}
+}
+
+.b-mMenu {
+	display: none;
+
+	&.js-is-visible {
+		display: block;
+	}
+}

@@ -1,0 +1,105 @@
+/**
+ * $GLOBALS
+ * ==========================================================================
+ * Here are any base styles added to all elements (*), <html> or <body>.
+ * If adding a background image or color to the body, I'd suggest doing
+ * that here as well.
+ */
+
+* {
+	&,
+	&:before,
+	&:after {
+		box-sizing: border-box;
+	}
+}
+
+html {
+	min-height: 100%;
+	font-size: 100%;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: $base-font-family;
+	color: $c-font-main;
+
+	@include px-rem(font-size, $base-font-size);
+	line-height: $base-line-height;
+
+	@include bp(medium) {
+		@include px-rem(font-size, $base-font-size-medium);
+		line-height: $base-line-height-medium;
+	}
+
+	@include bp(medium-small) {
+		@include px-rem(font-size, $base-font-size-small);
+		line-height: $base-line-height-small;
+	}
+}
+
+img, iframe {
+	max-width: 100%;
+	//width: 100%;
+	height: auto;
+}
+
+.g-container {
+	max-width: 960px;
+	margin: 0 auto;
+
+	@include bp(1023px) {
+		width: 90%;
+	}
+}
+
+.g-clearfix {
+	@include clearfix;
+}
+
+.accessibility,
+.is-visuallyhidden,
+.skiplink {
+	@include accessibility;
+}
+
+.g-valid {
+	color: $c-error;
+}
+
+.g-error {
+	color: $c-valid;
+}
+
+/* Display Classes */
+.g-hide-medium {
+	@include bp(medium) {
+		display: none;
+	}
+}
+
+.g-hide-medium-small {
+	@include bp(medium-small) {
+		display: none;
+	}
+}
+
+.g-hide-small {
+	@include bp(small) {
+		display: none;
+	}
+}
+
+@if $use-custom-selection == true {
+	::-moz-selection {
+		background: $c-selection;
+		color: $c-selection-text;
+		text-shadow: none;
+	}
+
+	::selection {
+		background: $c-selection;
+		color: $c-selection-text;
+		text-shadow: none;
+	}
+}

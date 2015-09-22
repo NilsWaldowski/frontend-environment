@@ -1,0 +1,65 @@
+ul, ol, dd {
+	list-style: none;
+}
+
+ul.rte_ul, ol.rte_ol {
+	margin-left: $list-male;
+	list-style: $list-type;
+
+	@include bp(medium-small) {
+		margin-left: 16px;
+	}
+
+	li {
+		margin: $list-mato 0 $list-mabo 0;
+	}
+
+	ul, ol {
+		margin-left: $list-male;
+		list-style: $list-type;
+	}
+}
+
+ol.rte_ol {
+	list-style: decimal;
+
+	@include bp(medium-small) {
+		margin-left: 22px;
+	}
+
+	ol {
+		list-style: decimal;
+	}
+}
+
+dl.rte_dl {
+
+	dt {
+		font-weight: bold;
+		margin-top: 0.75em;
+	}
+
+	dd {
+		margin-left: $list-male;
+
+		@include bp(medium-small) {
+			margin-left: 0;
+		}
+	}
+}
+
+// rte helper class in order to display the list styles immediately
+.htmlarea-content-body {
+
+	ul {
+		@extend .rte_ul;
+	}
+
+	ol {
+		@extend .rte_ol;
+	}
+
+	dl {
+		@extend .rte_dl;
+	}
+}

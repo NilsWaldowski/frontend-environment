@@ -1,0 +1,64 @@
+// SVG responsive handling --> http://demosthenes.info/blog/744/Make-SVG-Responsive
+.svg-container {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 100%;
+	padding-bottom: 100%; // depending on the svg ratio - this example has a 1:1 ratio (height / width = ratio)
+	// padding-bottom: 50%; would be used for a 1:2 ratio etc.
+}
+
+.svg-content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+/**
+ * Icons (SVG, PNG, Inline-Content, whatever)
+ * --------------------------------------------------------------------------
+ */
+.link-icon {
+
+	&:before {
+		text-decoration: none;
+		content: "\203A";
+		padding-right: 6px;
+		display: inline-block;
+	}
+
+	&:hover {
+		> span {
+			// extra span necessary for ie's underline problem with :before
+			text-decoration: none;
+		}
+	}
+}
+
+.link-icon--mail {
+	@extend .link-icon;
+
+	&:before {
+		content: "\00bb";
+	}
+}
+
+.link-icon-svg {
+	@extend .link-icon;
+
+	&:before {
+		content: "";
+		width: 55px;
+		height: 55px;
+		background: url('../Icons/icon_example.svg') no-repeat;
+	}
+}
+
+// fallback
+.lte9 {
+	.link-icon-svg {
+		background: url('../Icons/icon_example.png') no-repeat;
+	}
+}

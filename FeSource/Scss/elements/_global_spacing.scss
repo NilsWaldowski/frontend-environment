@@ -1,0 +1,56 @@
+/*------------------------------------*\
+    $SHARED
+\*------------------------------------*/
+@if $use-global-spacing == true {
+
+	/**
+	 * Base elements
+	 */
+	ul, ol, dl,
+	blockquote, p, address,
+	table,
+	fieldset,
+	figure,
+	pre {
+		@include space-reset;
+		margin-bottom: em($space-element);
+	}
+
+	label {
+		margin-bottom: em($space-label);
+	}
+
+	input, textarea {
+		margin-bottom: em($space-input);
+	}
+
+	ul ul, ol ol, dl dl {
+		margin-bottom: 0;
+	}
+
+	.csc-default, .csc-frame {
+		margin-bottom: $space-module + px;
+	}
+
+	/**
+	 * border content elements
+	 */
+	hr, .rule, .csc-frame-rulerAfter, .csc-frame-rulerBefore {
+		margin: 0;
+	}
+
+	.csc-frame-rulerAfter {
+		margin-bottom: $space-module-half + px;
+		padding-bottom: $space-module-half + px;
+	}
+
+	.csc-frame-rulerBefore {
+		margin-top: $space-module-half + px;
+		padding-top: $space-module-half + px;
+	}
+
+	hr {
+		margin-top: $space-module-half + px;
+		margin-bottom: $space-module-half + px;
+	}
+}
