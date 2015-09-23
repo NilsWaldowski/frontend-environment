@@ -12,16 +12,18 @@
 /**
  * Unknown helper exception.
  */
-class Mustache_Exception_UnknownHelperException extends InvalidArgumentException implements Mustache_Exception {
+class Mustache_Exception_UnknownHelperException extends InvalidArgumentException implements Mustache_Exception
+{
+    protected $helperName;
 
-	protected $helperName;
+    public function __construct($helperName)
+    {
+        $this->helperName = $helperName;
+        parent::__construct(sprintf('Unknown helper: %s', $helperName));
+    }
 
-	public function __construct($helperName) {
-		$this->helperName = $helperName;
-		parent::__construct(sprintf('Unknown helper: %s', $helperName));
-	}
-
-	public function getHelperName() {
-		return $this->helperName;
-	}
+    public function getHelperName()
+    {
+        return $this->helperName;
+    }
 }

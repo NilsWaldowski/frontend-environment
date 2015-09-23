@@ -39,9 +39,9 @@
 			return (document.cookie = [
 				encodeURIComponent(key), '=', config.raw ? value : encodeURIComponent(value),
 				options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-				options.path ? '; path=' + options.path : '',
-				options.domain ? '; domain=' + options.domain : '',
-				options.secure ? '; secure' : ''
+				options.path    ? '; path=' + options.path : '',
+				options.domain  ? '; domain=' + options.domain : '',
+				options.secure  ? '; secure' : ''
 			].join(''));
 		}
 
@@ -79,27 +79,27 @@
  */
 
 var DataSaver = {
-
+	
 	// the name of the cookie to store the data in
 	cookieName: "patternlab",
-
+	
 	/**
-	 * Add a given value to the cookie
-	 * @param  {String}       the name of the key
-	 * @param  {String}       the value
-	 */
-	addValue: function (name, val) {
+	* Add a given value to the cookie
+	* @param  {String}       the name of the key
+	* @param  {String}       the value
+	*/
+	addValue: function (name,val) {
 		var cookieVal = $.cookie(this.cookieName);
-		cookieVal = ((cookieVal === null) || (cookieVal === "")) ? name + "~" + val : cookieVal + "|" + name + "~" + val;
-		$.cookie(this.cookieName, cookieVal);
+		cookieVal = ((cookieVal === null) || (cookieVal === "")) ? name+"~"+val : cookieVal+"|"+name+"~"+val;
+		$.cookie(this.cookieName,cookieVal);
 	},
-
+	
 	/**
-	 * Update a value found in the cookie. If the key doesn't exist add the value
-	 * @param  {String}       the name of the key
-	 * @param  {String}       the value
-	 */
-	updateValue: function (name, val) {
+	* Update a value found in the cookie. If the key doesn't exist add the value
+	* @param  {String}       the name of the key
+	* @param  {String}       the value
+	*/
+	updateValue: function (name,val) {
 		if (this.findValue(name)) {
 			var updateCookieVals = "";
 			var cookieVals = $.cookie(this.cookieName).split("|");
@@ -108,18 +108,18 @@ var DataSaver = {
 				if (fieldVals[0] == name) {
 					fieldVals[1] = val;
 				}
-				updateCookieVals += (i > 0) ? "|" + fieldVals[0] + "~" + fieldVals[1] : fieldVals[0] + "~" + fieldVals[1];
+				updateCookieVals += (i > 0) ? "|"+fieldVals[0]+"~"+fieldVals[1] : fieldVals[0]+"~"+fieldVals[1];
 			}
-			$.cookie(this.cookieName, updateCookieVals);
+			$.cookie(this.cookieName,updateCookieVals);
 		} else {
-			this.addValue(name, val);
+			this.addValue(name,val);
 		}
 	},
-
+	
 	/**
-	 * Remove the given key
-	 * @param  {String}       the name of the key
-	 */
+	* Remove the given key
+	* @param  {String}       the name of the key
+	*/
 	removeValue: function (name) {
 		var updateCookieVals = "";
 		var cookieVals = $.cookie(this.cookieName).split("|");
@@ -127,19 +127,19 @@ var DataSaver = {
 		for (var i = 0; i < cookieVals.length; i++) {
 			var fieldVals = cookieVals[i].split("~");
 			if (fieldVals[0] != name) {
-				updateCookieVals += (k === 0) ? fieldVals[0] + "~" + fieldVals[1] : "|" + fieldVals[0] + "~" + fieldVals[1];
+				updateCookieVals += (k === 0) ? fieldVals[0]+"~"+fieldVals[1] : "|"+fieldVals[0]+"~"+fieldVals[1];
 				k++;
 			}
 		}
-		$.cookie(this.cookieName, updateCookieVals);
+		$.cookie(this.cookieName,updateCookieVals);
 	},
-
+	
 	/**
-	 * Find the value using the given key
-	 * @param  {String}       the name of the key
-	 *
-	 * @return {String}       the value of the key or false if the value isn't found
-	 */
+	* Find the value using the given key
+	* @param  {String}       the name of the key
+	*
+	* @return {String}       the value of the key or false if the value isn't found
+	*/
 	findValue: function (name) {
 		if ($.cookie(this.cookieName)) {
 			var cookieVals = $.cookie(this.cookieName).split("|");
@@ -149,8 +149,8 @@ var DataSaver = {
 					return fieldVals[1];
 				}
 			}
-		}
+		} 
 		return false;
 	}
-
+	
 };

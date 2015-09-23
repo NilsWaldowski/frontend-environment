@@ -9,26 +9,28 @@ use Wrench\Protocol\HybiProtocol;
  *
  * @see http://tools.ietf.org/html/rfc6455
  */
-class Rfc6455Protocol extends HybiProtocol {
-	const VERSION = 13;
+class Rfc6455Protocol extends HybiProtocol
+{
+    const VERSION = 13;
 
-	/**
-	 * @see Wrench\Protocol.Protocol::getVersion()
-	 */
-	public function getVersion() {
-		return self::VERSION;
-	}
+    /**
+     * @see Wrench\Protocol.Protocol::getVersion()
+     */
+    public function getVersion()
+    {
+        return self::VERSION;
+    }
 
-	/**
-	 * This is our most recent protocol class
-	 *
-	 * @see Wrench\Protocol.Protocol::acceptsVersion()
-	 */
-	public function acceptsVersion($version) {
-		if ((int) $version <= 13) {
-			return TRUE;
-		}
-
-		return FALSE;
-	}
+    /**
+     * This is our most recent protocol class
+     *
+     * @see Wrench\Protocol.Protocol::acceptsVersion()
+     */
+    public function acceptsVersion($version)
+    {
+        if ((int)$version <= 13) {
+            return true;
+        }
+        return false;
+    }
 }

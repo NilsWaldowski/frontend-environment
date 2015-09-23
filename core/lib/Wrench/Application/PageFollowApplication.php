@@ -17,39 +17,38 @@ use Wrench\Application\Application;
 use Wrench\Application\NamedApplication;
 
 class PageFollowApplication extends Application {
-
+	
 	protected $clients = array();
-
-	protected $data = NULL;
-
+	protected $data = null;
+	
 	/**
-	 * When a client connects add it to the list of connected clients. Also send the client the current page to load in their iframe
-	 */
+	* When a client connects add it to the list of connected clients. Also send the client the current page to load in their iframe
+	*/
 	public function onConnect($client) {
 		$id = $client->getId();
 		$this->clients[$id] = $client;
-		if ($this->data != NULL) {
+		if ($this->data != null) {
 			$client->send(json_encode($this->data));
 		}
 	}
-
+	
 	/**
-	 * When a client disconnects remove it from the list of connected clients
-	 */
+	* When a client disconnects remove it from the list of connected clients
+	*/
 	public function onDisconnect($client) {
 		$id = $client->getId();
 		unset($this->clients[$id]);
 	}
-
+	
 	/**
-	 * When receiving a message from a client, strip it to avoid cross-domain issues and send it to all clients except the one who sent it
-	 * Also store the address as the current address for any new clients that attach
-	 */
+	* When receiving a message from a client, strip it to avoid cross-domain issues and send it to all clients except the one who sent it
+	* Also store the address as the current address for any new clients that attach
+	*/
 	public function onData($data, $client) {
-
+		
 		$dataDecoded = json_decode($data);
-
-		$dataDecoded->url = "/" . $dataDecoded->url;
+		
+		$dataDecoded->url = "/".$dataDecoded->url;
 		$dataEncoded = json_encode($dataDecoded);
 		$testId = $client->getId();
 		foreach ($this->clients as $sendto) {
@@ -57,14 +56,14 @@ class PageFollowApplication extends Application {
 				$sendto->send($dataEncoded);
 			}
 		}
-
+		
 		$this->data = $dataDecoded;
-
+		
 	}
 
 	/**
-	 * Dead function in this instance
-	 */
+	* Dead function in this instance
+	*/
 	public function onUpdate() {
 		// not using for this application
 	}

@@ -11,118 +11,119 @@
 
 /**
  * Mustache Compiler class.
+ *
  * This class is responsible for turning a Mustache token parse tree into normal PHP source code.
  */
-class Mustache_Compiler {
+class Mustache_Compiler
+{
 
-	private $sections;
+    private $sections;
+    private $source;
+    private $indentNextLine;
+    private $customEscape;
+    private $charset;
+    private $strictCallables;
+    private $pragmas;
 
-	private $source;
+    /**
+     * Compile a Mustache token parse tree into PHP source code.
+     *
+     * @param string $source          Mustache Template source code
+     * @param string $tree            Parse tree of Mustache tokens
+     * @param string $name            Mustache Template class name
+     * @param bool   $customEscape    (default: false)
+     * @param string $charset         (default: 'UTF-8')
+     * @param bool   $strictCallables (default: false)
+     *
+     * @return string Generated PHP source code
+     */
+    public function compile($source, array $tree, $name, $customEscape = false, $charset = 'UTF-8', $strictCallables = false)
+    {
+        $this->pragmas         = array();
+        $this->sections        = array();
+        $this->source          = $source;
+        $this->indentNextLine  = true;
+        $this->customEscape    = $customEscape;
+        $this->charset         = $charset;
+        $this->strictCallables = $strictCallables;
 
-	private $indentNextLine;
+        return $this->writeCode($tree, $name);
+    }
 
-	private $customEscape;
+    /**
+     * Helper function for walking the Mustache token parse tree.
+     *
+     * @throws Mustache_Exception_SyntaxException upon encountering unknown token types.
+     *
+     * @param array $tree  Parse tree of Mustache tokens
+     * @param int   $level (default: 0)
+     *
+     * @return string Generated PHP source code
+     */
+    private function walk(array $tree, $level = 0)
+    {
+        $code = '';
+        $level++;
+        foreach ($tree as $node) {
+            switch ($node[Mustache_Tokenizer::TYPE]) {
+                case Mustache_Tokenizer::T_PRAGMA:
+                    $this->pragmas[$node[Mustache_Tokenizer::NAME]] = true;
+                    break;
 
-	private $charset;
+                case Mustache_Tokenizer::T_SECTION:
+                    $code .= $this->section(
+                        $node[Mustache_Tokenizer::NODES],
+                        $node[Mustache_Tokenizer::NAME],
+                        $node[Mustache_Tokenizer::INDEX],
+                        $node[Mustache_Tokenizer::END],
+                        $node[Mustache_Tokenizer::OTAG],
+                        $node[Mustache_Tokenizer::CTAG],
+                        $level
+                    );
+                    break;
 
-	private $strictCallables;
+                case Mustache_Tokenizer::T_INVERTED:
+                    $code .= $this->invertedSection(
+                        $node[Mustache_Tokenizer::NODES],
+                        $node[Mustache_Tokenizer::NAME],
+                        $level
+                    );
+                    break;
 
-	private $pragmas;
+                case Mustache_Tokenizer::T_PARTIAL:
+                case Mustache_Tokenizer::T_PARTIAL_2:
+                    $code .= $this->partial(
+                        $node[Mustache_Tokenizer::NAME],
+                        isset($node[Mustache_Tokenizer::INDENT]) ? $node[Mustache_Tokenizer::INDENT] : '',
+                        $level
+                    );
+                    break;
 
-	/**
-	 * Compile a Mustache token parse tree into PHP source code.
-	 *
-	 * @param string $source Mustache Template source code
-	 * @param string $tree Parse tree of Mustache tokens
-	 * @param string $name Mustache Template class name
-	 * @param bool $customEscape (default: false)
-	 * @param string $charset (default: 'UTF-8')
-	 * @param bool $strictCallables (default: false)
-	 * @return string Generated PHP source code
-	 */
-	public function compile($source, array $tree, $name, $customEscape = FALSE, $charset = 'UTF-8', $strictCallables = FALSE) {
-		$this->pragmas = array();
-		$this->sections = array();
-		$this->source = $source;
-		$this->indentNextLine = TRUE;
-		$this->customEscape = $customEscape;
-		$this->charset = $charset;
-		$this->strictCallables = $strictCallables;
+                case Mustache_Tokenizer::T_UNESCAPED:
+                case Mustache_Tokenizer::T_UNESCAPED_2:
+                    $code .= $this->variable($node[Mustache_Tokenizer::NAME], false, $level);
+                    break;
 
-		return $this->writeCode($tree, $name);
-	}
+                case Mustache_Tokenizer::T_COMMENT:
+                    break;
 
-	/**
-	 * Helper function for walking the Mustache token parse tree.
-	 *
-	 * @throws Mustache_Exception_SyntaxException upon encountering unknown token types.
-	 * @param array $tree Parse tree of Mustache tokens
-	 * @param int $level (default: 0)
-	 * @return string Generated PHP source code
-	 */
-	private function walk(array $tree, $level = 0) {
-		$code = '';
-		$level++;
-		foreach ($tree as $node) {
-			switch ($node[Mustache_Tokenizer::TYPE]) {
-				case Mustache_Tokenizer::T_PRAGMA:
-					$this->pragmas[$node[Mustache_Tokenizer::NAME]] = TRUE;
-					break;
+                case Mustache_Tokenizer::T_ESCAPED:
+                    $code .= $this->variable($node[Mustache_Tokenizer::NAME], true, $level);
+                    break;
 
-				case Mustache_Tokenizer::T_SECTION:
-					$code .= $this->section(
-						$node[Mustache_Tokenizer::NODES],
-						$node[Mustache_Tokenizer::NAME],
-						$node[Mustache_Tokenizer::INDEX],
-						$node[Mustache_Tokenizer::END],
-						$node[Mustache_Tokenizer::OTAG],
-						$node[Mustache_Tokenizer::CTAG],
-						$level
-					);
-					break;
+                case Mustache_Tokenizer::T_TEXT:
+                    $code .= $this->text($node[Mustache_Tokenizer::VALUE], $level);
+                    break;
 
-				case Mustache_Tokenizer::T_INVERTED:
-					$code .= $this->invertedSection(
-						$node[Mustache_Tokenizer::NODES],
-						$node[Mustache_Tokenizer::NAME],
-						$level
-					);
-					break;
+                default:
+                    throw new Mustache_Exception_SyntaxException(sprintf('Unknown token type: %s', $node[Mustache_Tokenizer::TYPE]), $node);
+            }
+        }
 
-				case Mustache_Tokenizer::T_PARTIAL:
-				case Mustache_Tokenizer::T_PARTIAL_2:
-					$code .= $this->partial(
-						$node[Mustache_Tokenizer::NAME],
-						isset($node[Mustache_Tokenizer::INDENT]) ? $node[Mustache_Tokenizer::INDENT] : '',
-						$level
-					);
-					break;
+        return $code;
+    }
 
-				case Mustache_Tokenizer::T_UNESCAPED:
-				case Mustache_Tokenizer::T_UNESCAPED_2:
-					$code .= $this->variable($node[Mustache_Tokenizer::NAME], FALSE, $level);
-					break;
-
-				case Mustache_Tokenizer::T_COMMENT:
-					break;
-
-				case Mustache_Tokenizer::T_ESCAPED:
-					$code .= $this->variable($node[Mustache_Tokenizer::NAME], TRUE, $level);
-					break;
-
-				case Mustache_Tokenizer::T_TEXT:
-					$code .= $this->text($node[Mustache_Tokenizer::VALUE], $level);
-					break;
-
-				default:
-					throw new Mustache_Exception_SyntaxException(sprintf('Unknown token type: %s', $node[Mustache_Tokenizer::TYPE]), $node);
-			}
-		}
-
-		return $code;
-	}
-
-	const KLASS = '<?php
+    const KLASS = '<?php
 
         class %s extends Mustache_Template
         {
@@ -139,7 +140,7 @@ class Mustache_Compiler {
         %s
         }';
 
-	const KLASS_NO_LAMBDAS = '<?php
+    const KLASS_NO_LAMBDAS = '<?php
 
         class %s extends Mustache_Template
         {%s
@@ -152,30 +153,32 @@ class Mustache_Compiler {
             }
         }';
 
-	const STRICT_CALLABLE = 'protected $strictCallables = true;';
+    const STRICT_CALLABLE = 'protected $strictCallables = true;';
 
-	/**
-	 * Generate Mustache Template class PHP source.
-	 *
-	 * @param array $tree Parse tree of Mustache tokens
-	 * @param string $name Mustache Template class name
-	 * @return string Generated PHP source code
-	 */
-	private function writeCode($tree, $name) {
-		$code = $this->walk($tree);
-		$sections = implode("\n", $this->sections);
-		$klass = empty($this->sections) ? self::KLASS_NO_LAMBDAS : self::KLASS;
-		$callable = $this->strictCallables ? $this->prepare(self::STRICT_CALLABLE) : '';
+    /**
+     * Generate Mustache Template class PHP source.
+     *
+     * @param array  $tree Parse tree of Mustache tokens
+     * @param string $name Mustache Template class name
+     *
+     * @return string Generated PHP source code
+     */
+    private function writeCode($tree, $name)
+    {
+        $code     = $this->walk($tree);
+        $sections = implode("\n", $this->sections);
+        $klass    = empty($this->sections) ? self::KLASS_NO_LAMBDAS : self::KLASS;
+        $callable = $this->strictCallables ? $this->prepare(self::STRICT_CALLABLE) : '';
 
-		return sprintf($this->prepare($klass, 0, FALSE, TRUE), $name, $callable, $code, $sections);
-	}
+        return sprintf($this->prepare($klass, 0, false, true), $name, $callable, $code, $sections);
+    }
 
-	const SECTION_CALL = '
+    const SECTION_CALL = '
         // %s section
         $buffer .= $this->section%s($context, $indent, $context->%s(%s));
     ';
 
-	const SECTION = '
+    const SECTION = '
         private function section%s(Mustache_Context $context, $indent, $value)
         {
             $buffer = \'\';
@@ -195,125 +198,135 @@ class Mustache_Compiler {
             return $buffer;
         }';
 
-	/**
-	 * Generate Mustache Template section PHP source.
-	 *
-	 * @param array $nodes Array of child tokens
-	 * @param string $id Section name
-	 * @param int $start Section start offset
-	 * @param int $end Section end offset
-	 * @param string $otag Current Mustache opening tag
-	 * @param string $ctag Current Mustache closing tag
-	 * @param int $level
-	 * @return string Generated section PHP source code
-	 */
-	private function section($nodes, $id, $start, $end, $otag, $ctag, $level) {
-		$method = $this->getFindMethod($id);
-		$id = var_export($id, TRUE);
-		$source = var_export(substr($this->source, $start, $end - $start), TRUE);
-		$callable = $this->getCallable();
+    /**
+     * Generate Mustache Template section PHP source.
+     *
+     * @param array  $nodes Array of child tokens
+     * @param string $id    Section name
+     * @param int    $start Section start offset
+     * @param int    $end   Section end offset
+     * @param string $otag  Current Mustache opening tag
+     * @param string $ctag  Current Mustache closing tag
+     * @param int    $level
+     *
+     * @return string Generated section PHP source code
+     */
+    private function section($nodes, $id, $start, $end, $otag, $ctag, $level)
+    {
+        $method   = $this->getFindMethod($id);
+        $id       = var_export($id, true);
+        $source   = var_export(substr($this->source, $start, $end - $start), true);
+        $callable = $this->getCallable();
 
-		if ($otag !== '{{' || $ctag !== '}}') {
-			$delims = ', ' . var_export(sprintf('{{= %s %s =}}', $otag, $ctag), TRUE);
-		} else {
-			$delims = '';
-		}
+        if ($otag !== '{{' || $ctag !== '}}') {
+            $delims = ', '.var_export(sprintf('{{= %s %s =}}', $otag, $ctag), true);
+        } else {
+            $delims = '';
+        }
 
-		$key = ucfirst(md5($delims . "\n" . $source));
+        $key    = ucfirst(md5($delims."\n".$source));
 
-		if (!isset($this->sections[$key])) {
-			$this->sections[$key] = sprintf($this->prepare(self::SECTION), $key, $callable, $source, $delims, $this->walk($nodes, 2));
-		}
+        if (!isset($this->sections[$key])) {
+            $this->sections[$key] = sprintf($this->prepare(self::SECTION), $key, $callable, $source, $delims, $this->walk($nodes, 2));
+        }
 
-		return sprintf($this->prepare(self::SECTION_CALL, $level), $id, $key, $method, $id);
-	}
+        return sprintf($this->prepare(self::SECTION_CALL, $level), $id, $key, $method, $id);
+    }
 
-	const INVERTED_SECTION = '
+    const INVERTED_SECTION = '
         // %s inverted section
         $value = $context->%s(%s);
         if (empty($value)) {
             %s
         }';
 
-	/**
-	 * Generate Mustache Template inverted section PHP source.
-	 *
-	 * @param array $nodes Array of child tokens
-	 * @param string $id Section name
-	 * @param int $level
-	 * @return string Generated inverted section PHP source code
-	 */
-	private function invertedSection($nodes, $id, $level) {
-		$method = $this->getFindMethod($id);
-		$id = var_export($id, TRUE);
+    /**
+     * Generate Mustache Template inverted section PHP source.
+     *
+     * @param array  $nodes Array of child tokens
+     * @param string $id    Section name
+     * @param int    $level
+     *
+     * @return string Generated inverted section PHP source code
+     */
+    private function invertedSection($nodes, $id, $level)
+    {
+        $method = $this->getFindMethod($id);
+        $id     = var_export($id, true);
 
-		return sprintf($this->prepare(self::INVERTED_SECTION, $level), $id, $method, $id, $this->walk($nodes, $level));
-	}
+        return sprintf($this->prepare(self::INVERTED_SECTION, $level), $id, $method, $id, $this->walk($nodes, $level));
+    }
 
-	const PARTIAL = '
+    const PARTIAL = '
         if ($partial = $this->mustache->loadPartial(%s)) {
             $buffer .= $partial->renderInternal($context, %s);
         }
     ';
 
-	/**
-	 * Generate Mustache Template partial call PHP source.
-	 *
-	 * @param string $id Partial name
-	 * @param string $indent Whitespace indent to apply to partial
-	 * @param int $level
-	 * @return string Generated partial call PHP source code
-	 */
-	private function partial($id, $indent, $level) {
-		return sprintf(
-			$this->prepare(self::PARTIAL, $level),
-			var_export($id, TRUE),
-			var_export($indent, TRUE)
-		);
-	}
+    /**
+     * Generate Mustache Template partial call PHP source.
+     *
+     * @param string $id     Partial name
+     * @param string $indent Whitespace indent to apply to partial
+     * @param int    $level
+     *
+     * @return string Generated partial call PHP source code
+     */
+    private function partial($id, $indent, $level)
+    {
+        return sprintf(
+            $this->prepare(self::PARTIAL, $level),
+            var_export($id, true),
+            var_export($indent, true)
+        );
+    }
 
-	const VARIABLE = '
+    const VARIABLE = '
         $value = $this->resolveValue($context->%s(%s), $context, $indent);%s
         $buffer .= %s%s;
     ';
 
-	/**
-	 * Generate Mustache Template variable interpolation PHP source.
-	 *
-	 * @param string $id Variable name
-	 * @param boolean $escape Escape the variable value for output?
-	 * @param int $level
-	 * @return string Generated variable interpolation PHP source
-	 */
-	private function variable($id, $escape, $level) {
-		$filters = '';
+    /**
+     * Generate Mustache Template variable interpolation PHP source.
+     *
+     * @param string  $id     Variable name
+     * @param boolean $escape Escape the variable value for output?
+     * @param int     $level
+     *
+     * @return string Generated variable interpolation PHP source
+     */
+    private function variable($id, $escape, $level)
+    {
+        $filters = '';
 
-		if (isset($this->pragmas[Mustache_Engine::PRAGMA_FILTERS])) {
-			list($id, $filters) = $this->getFilters($id, $level);
-		}
+        if (isset($this->pragmas[Mustache_Engine::PRAGMA_FILTERS])) {
+            list($id, $filters) = $this->getFilters($id, $level);
+        }
 
-		$method = $this->getFindMethod($id);
-		$id = ($method !== 'last') ? var_export($id, TRUE) : '';
-		$value = $escape ? $this->getEscape() : '$value';
+        $method = $this->getFindMethod($id);
+        $id     = ($method !== 'last') ? var_export($id, true) : '';
+        $value  = $escape ? $this->getEscape() : '$value';
 
-		return sprintf($this->prepare(self::VARIABLE, $level), $method, $id, $filters, $this->flushIndent(), $value);
-	}
+        return sprintf($this->prepare(self::VARIABLE, $level), $method, $id, $filters, $this->flushIndent(), $value);
+    }
 
-	/**
-	 * Generate Mustache Template variable filtering PHP source.
-	 *
-	 * @param string $id Variable name
-	 * @param int $level
-	 * @return string Generated variable filtering PHP source
-	 */
-	private function getFilters($id, $level) {
-		$filters = array_map('trim', explode('|', $id));
-		$id = array_shift($filters);
+    /**
+     * Generate Mustache Template variable filtering PHP source.
+     *
+     * @param string $id    Variable name
+     * @param int    $level
+     *
+     * @return string Generated variable filtering PHP source
+     */
+    private function getFilters($id, $level)
+    {
+        $filters = array_map('trim', explode('|', $id));
+        $id      = array_shift($filters);
 
-		return array($id, $this->getFilter($filters, $level));
-	}
+        return array($id, $this->getFilter($filters, $level));
+    }
 
-	const FILTER = '
+    const FILTER = '
         $filter = $context->%s(%s);
         if (!(%s)) {
             throw new Mustache_Exception_UnknownFilterException(%s);
@@ -321,128 +334,142 @@ class Mustache_Compiler {
         $value = call_user_func($filter, $value);%s
     ';
 
-	/**
-	 * Generate PHP source for a single filter.
-	 *
-	 * @param array $filters
-	 * @param int $level
-	 * @return string Generated filter PHP source
-	 */
-	private function getFilter(array $filters, $level) {
-		if (empty($filters)) {
-			return '';
-		}
+    /**
+     * Generate PHP source for a single filter.
+     *
+     * @param array $filters
+     * @param int   $level
+     *
+     * @return string Generated filter PHP source
+     */
+    private function getFilter(array $filters, $level)
+    {
+        if (empty($filters)) {
+            return '';
+        }
 
-		$name = array_shift($filters);
-		$method = $this->getFindMethod($name);
-		$filter = ($method !== 'last') ? var_export($name, TRUE) : '';
-		$callable = $this->getCallable('$filter');
-		$msg = var_export($name, TRUE);
+        $name     = array_shift($filters);
+        $method   = $this->getFindMethod($name);
+        $filter   = ($method !== 'last') ? var_export($name, true) : '';
+        $callable = $this->getCallable('$filter');
+        $msg      = var_export($name, true);
 
-		return sprintf($this->prepare(self::FILTER, $level), $method, $filter, $callable, $msg, $this->getFilter($filters, $level));
-	}
+        return sprintf($this->prepare(self::FILTER, $level), $method, $filter, $callable, $msg, $this->getFilter($filters, $level));
+    }
 
-	const LINE = '$buffer .= "\n";';
-	const TEXT = '$buffer .= %s%s;';
+    const LINE = '$buffer .= "\n";';
+    const TEXT = '$buffer .= %s%s;';
 
-	/**
-	 * Generate Mustache Template output Buffer call PHP source.
-	 *
-	 * @param string $text
-	 * @param int $level
-	 * @return string Generated output Buffer call PHP source
-	 */
-	private function text($text, $level) {
-		if ($text === "\n") {
-			$this->indentNextLine = TRUE;
+    /**
+     * Generate Mustache Template output Buffer call PHP source.
+     *
+     * @param string $text
+     * @param int    $level
+     *
+     * @return string Generated output Buffer call PHP source
+     */
+    private function text($text, $level)
+    {
+        if ($text === "\n") {
+            $this->indentNextLine = true;
 
-			return $this->prepare(self::LINE, $level);
-		} else {
-			return sprintf($this->prepare(self::TEXT, $level), $this->flushIndent(), var_export($text, TRUE));
-		}
-	}
+            return $this->prepare(self::LINE, $level);
+        } else {
+            return sprintf($this->prepare(self::TEXT, $level), $this->flushIndent(), var_export($text, true));
+        }
+    }
 
-	/**
-	 * Prepare PHP source code snippet for output.
-	 *
-	 * @param string $text
-	 * @param int $bonus Additional indent level (default: 0)
-	 * @param boolean $prependNewline Prepend a newline to the snippet? (default: true)
-	 * @param boolean $appendNewline Append a newline to the snippet? (default: false)
-	 * @return string PHP source code snippet
-	 */
-	private function prepare($text, $bonus = 0, $prependNewline = TRUE, $appendNewline = FALSE) {
-		$text = ($prependNewline ? "\n" : '') . trim($text);
-		if ($prependNewline) {
-			$bonus++;
-		}
-		if ($appendNewline) {
-			$text .= "\n";
-		}
+    /**
+     * Prepare PHP source code snippet for output.
+     *
+     * @param string  $text
+     * @param int     $bonus          Additional indent level (default: 0)
+     * @param boolean $prependNewline Prepend a newline to the snippet? (default: true)
+     * @param boolean $appendNewline  Append a newline to the snippet? (default: false)
+     *
+     * @return string PHP source code snippet
+     */
+    private function prepare($text, $bonus = 0, $prependNewline = true, $appendNewline = false)
+    {
+        $text = ($prependNewline ? "\n" : '').trim($text);
+        if ($prependNewline) {
+            $bonus++;
+        }
+        if ($appendNewline) {
+            $text .= "\n";
+        }
 
-		return preg_replace("/\n( {8})?/", "\n" . str_repeat(" ", $bonus * 4), $text);
-	}
+        return preg_replace("/\n( {8})?/", "\n".str_repeat(" ", $bonus * 4), $text);
+    }
 
-	const DEFAULT_ESCAPE = 'htmlspecialchars(%s, ENT_COMPAT, %s)';
-	const CUSTOM_ESCAPE = 'call_user_func($this->mustache->getEscape(), %s)';
+    const DEFAULT_ESCAPE = 'htmlspecialchars(%s, ENT_COMPAT, %s)';
+    const CUSTOM_ESCAPE  = 'call_user_func($this->mustache->getEscape(), %s)';
 
-	/**
-	 * Get the current escaper.
-	 *
-	 * @param string $value (default: '$value')
-	 * @return string Either a custom callback, or an inline call to `htmlspecialchars`
-	 */
-	private function getEscape($value = '$value') {
-		if ($this->customEscape) {
-			return sprintf(self::CUSTOM_ESCAPE, $value);
-		} else {
-			return sprintf(self::DEFAULT_ESCAPE, $value, var_export($this->charset, TRUE));
-		}
-	}
+    /**
+     * Get the current escaper.
+     *
+     * @param string $value (default: '$value')
+     *
+     * @return string Either a custom callback, or an inline call to `htmlspecialchars`
+     */
+    private function getEscape($value = '$value')
+    {
+        if ($this->customEscape) {
+            return sprintf(self::CUSTOM_ESCAPE, $value);
+        } else {
+            return sprintf(self::DEFAULT_ESCAPE, $value, var_export($this->charset, true));
+        }
+    }
 
-	/**
-	 * Select the appropriate Context `find` method for a given $id.
-	 * The return value will be one of `find`, `findDot` or `last`.
-	 *
-	 * @see Mustache_Context::find
-	 * @see Mustache_Context::findDot
-	 * @see Mustache_Context::last
-	 * @param string $id Variable name
-	 * @return string `find` method name
-	 */
-	private function getFindMethod($id) {
-		if ($id === '.') {
-			return 'last';
-		} elseif (strpos($id, '.') === FALSE) {
-			return 'find';
-		} else {
-			return 'findDot';
-		}
-	}
+    /**
+     * Select the appropriate Context `find` method for a given $id.
+     *
+     * The return value will be one of `find`, `findDot` or `last`.
+     *
+     * @see Mustache_Context::find
+     * @see Mustache_Context::findDot
+     * @see Mustache_Context::last
+     *
+     * @param string $id Variable name
+     *
+     * @return string `find` method name
+     */
+    private function getFindMethod($id)
+    {
+        if ($id === '.') {
+            return 'last';
+        } elseif (strpos($id, '.') === false) {
+            return 'find';
+        } else {
+            return 'findDot';
+        }
+    }
 
-	const IS_CALLABLE = '!is_string(%s) && is_callable(%s)';
-	const STRICT_IS_CALLABLE = 'is_object(%s) && is_callable(%s)';
+    const IS_CALLABLE        = '!is_string(%s) && is_callable(%s)';
+    const STRICT_IS_CALLABLE = 'is_object(%s) && is_callable(%s)';
 
-	private function getCallable($variable = '$value') {
-		$tpl = $this->strictCallables ? self::STRICT_IS_CALLABLE : self::IS_CALLABLE;
+    private function getCallable($variable = '$value')
+    {
+        $tpl = $this->strictCallables ? self::STRICT_IS_CALLABLE : self::IS_CALLABLE;
 
-		return sprintf($tpl, $variable, $variable);
-	}
+        return sprintf($tpl, $variable, $variable);
+    }
 
-	const LINE_INDENT = '$indent . ';
+    const LINE_INDENT = '$indent . ';
 
-	/**
-	 * Get the current $indent prefix to write to the buffer.
-	 *
-	 * @return string "$indent . " or ""
-	 */
-	private function flushIndent() {
-		if ($this->indentNextLine) {
-			$this->indentNextLine = FALSE;
+    /**
+     * Get the current $indent prefix to write to the buffer.
+     *
+     * @return string "$indent . " or ""
+     */
+    private function flushIndent()
+    {
+        if ($this->indentNextLine) {
+            $this->indentNextLine = false;
 
-			return self::LINE_INDENT;
-		} else {
-			return '';
-		}
-	}
+            return self::LINE_INDENT;
+        } else {
+            return '';
+        }
+    }
 }

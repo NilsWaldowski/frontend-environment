@@ -12,25 +12,25 @@
  */
 
 // auto-load classes
-require(__DIR__ . "/lib/SplClassLoader.php");
+require(__DIR__."/lib/SplClassLoader.php");
 
 // load wrench
-$loader = new SplClassLoader('Wrench', __DIR__ . '/lib');
+$loader = new SplClassLoader('Wrench', __DIR__.'/lib');
 $loader->register();
 
 // parse the main config for the content sync port
-if (!($config = @parse_ini_file(__DIR__ . "/../config/config.ini"))) {
+if (!($config = @parse_ini_file(__DIR__."/../config/config.ini"))) {
 	print "Missing the configuration file. Please build it using the Pattern Lab builder.\n";
-	exit;
+	exit;	
 }
 
 // give it a default port
-$port = ($config) ? trim($config['autoReloadPort']) : '8001';
-$args = getopt("s");
-$newlines = (isset($args["s"])) ? TRUE : FALSE;
+$port     = ($config) ? trim($config['autoReloadPort']) : '8001';
+$args     = getopt("s");
+$newlines = (isset($args["s"])) ? true : false;
 
 // start the content sync server
-$server = new \Wrench\Server('ws://0.0.0.0:' . $port . '/', array());
+$server   = new \Wrench\Server('ws://0.0.0.0:'.$port.'/', array());
 
 // register the application
 $server->registerApplication('autoreload', new \Wrench\Application\AutoReloadApplication($newlines));

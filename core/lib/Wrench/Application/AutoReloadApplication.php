@@ -18,60 +18,57 @@ use Wrench\Application\Application;
 use Wrench\Application\NamedApplication;
 
 class AutoReloadApplication extends Application {
-
-	protected $newlines = FALSE;
-
-	protected $clients = array();
-
-	protected $savedTimestamp = NULL;
-
-	protected $c = FALSE;
-
+	
+	protected $newlines         = false;
+	protected $clients          = array();
+	protected $savedTimestamp   = null;
+	protected $c                = false;
+	
 	/**
-	 * Set the saved timestamp. If the latest-change file doesn't exist simply use the current time as the saved time
-	 */
+	* Set the saved timestamp. If the latest-change file doesn't exist simply use the current time as the saved time
+	*/
 	public function __construct($newlines) {
-
+		
 		$this->newlines = $newlines;
-
-		if (file_exists(__DIR__ . "/../../../../public/latest-change.txt")) {
-			$this->savedTimestamp = file_get_contents(__DIR__ . "/../../../../public/latest-change.txt");
+		
+		if (file_exists(__DIR__."/../../../../public/latest-change.txt")) {
+			$this->savedTimestamp = file_get_contents(__DIR__."/../../../../public/latest-change.txt");
 		} else {
 			$this->savedTimestamp = time();
 		}
-
+		
 	}
-
+	
 	/**
-	 * When a client connects add it to the list of connected clients
-	 */
+	* When a client connects add it to the list of connected clients
+	*/
 	public function onConnect($client) {
 		$id = $client->getId();
 		$this->clients[$id] = $client;
 	}
-
+	
 	/**
-	 * When a client disconnects remove it from the list of connected clients
-	 */
+	* When a client disconnects remove it from the list of connected clients
+	*/
 	public function onDisconnect($client) {
 		$id = $client->getId();
 		unset($this->clients[$id]);
 	}
-
+	
 	/**
-	 * Dead function in this instance
-	 */
+	* Dead function in this instance
+	*/
 	public function onData($data, $client) {
 		// function not in use
 	}
-
+	
 	/**
-	 * Sends out a message once a second to all connected clients containing the contents of latest-change.txt
-	 */
+	* Sends out a message once a second to all connected clients containing the contents of latest-change.txt
+	*/
 	public function onUpdate() {
-
-		if (file_exists(__DIR__ . "/../../../../public/latest-change.txt")) {
-			$readTimestamp = file_get_contents(__DIR__ . "/../../../../public/latest-change.txt");
+		
+		if (file_exists(__DIR__."/../../../../public/latest-change.txt")) {
+			$readTimestamp = file_get_contents(__DIR__."/../../../../public/latest-change.txt");
 			if ($readTimestamp != $this->savedTimestamp) {
 				print "pattern lab updated. alerting connected browsers...\n";
 				foreach ($this->clients as $sendto) {
@@ -79,12 +76,10 @@ class AutoReloadApplication extends Application {
 				}
 				$this->savedTimestamp = $readTimestamp;
 			} else {
-				if ($this->newlines) {
-					print "\n";
-				}
+				if ($this->newlines) print "\n";
 			}
 		}
-
+		
 	}
 
 }

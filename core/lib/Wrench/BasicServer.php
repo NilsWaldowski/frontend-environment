@@ -4,63 +4,67 @@ namespace Wrench;
 
 use Wrench\Server;
 
-class BasicServer extends Server {
+class BasicServer extends Server
+{
+    protected $rateLimiter;
+    protected $originPolicy;
 
-	protected $rateLimiter;
+    /**
+     * Constructor
+     *
+     * @param string $uri
+     * @param array $options
+     */
+    public function __construct($uri, array $options = array())
+    {
+        parent::__construct($uri, $options);
 
-	protected $originPolicy;
+        $this->configureRateLimiter();
+        $this->configureOriginPolicy();
+    }
 
-	/**
-	 * Constructor
-	 *
-	 * @param string $uri
-	 * @param array $options
-	 */
-	public function __construct($uri, array $options = array()) {
-		parent::__construct($uri, $options);
+    /**
+     * @see Wrench.Server::configure()
+     */
+    protected function configure(array $options)
+    {
+        $options = array_merge(array(
+            'check_origin'        => true,
+            'allowed_origins'     => array(),
+            'origin_policy_class' => 'Wrench\Listener\OriginPolicy',
+            'rate_limiter_class'  => 'Wrench\Listener\RateLimiter'
+        ), $options);
 
-		$this->configureRateLimiter();
-		$this->configureOriginPolicy();
-	}
+        parent::configure($options);
+    }
 
-	/**
-	 * @see Wrench.Server::configure()
-	 */
-	protected function configure(array $options) {
-		$options = array_merge(array(
-			'check_origin' => TRUE,
-			'allowed_origins' => array(),
-			'origin_policy_class' => 'Wrench\Listener\OriginPolicy',
-			'rate_limiter_class' => 'Wrench\Listener\RateLimiter'
-		), $options);
+    protected function configureRateLimiter()
+    {
+        $class = $this->options['rate_limiter_class'];
+        $this->rateLimiter = new $class();
+        $this->rateLimiter->listen($this);
+    }
 
-		parent::configure($options);
-	}
+    /**
+     * Configures the origin policy
+     */
+    protected function configureOriginPolicy()
+    {
+        $class = $this->options['origin_policy_class'];
+        $this->originPolicy = new $class($this->options['allowed_origins']);
 
-	protected function configureRateLimiter() {
-		$class = $this->options['rate_limiter_class'];
-		$this->rateLimiter = new $class();
-		$this->rateLimiter->listen($this);
-	}
+        if ($this->options['check_origin']) {
+            $this->originPolicy->listen($this);
+        }
+    }
 
-	/**
-	 * Configures the origin policy
-	 */
-	protected function configureOriginPolicy() {
-		$class = $this->options['origin_policy_class'];
-		$this->originPolicy = new $class($this->options['allowed_origins']);
-
-		if ($this->options['check_origin']) {
-			$this->originPolicy->listen($this);
-		}
-	}
-
-	/**
-	 * Adds an allowed origin
-	 *
-	 * @param array $origin
-	 */
-	public function addAllowedOrigin($origin) {
-		$this->originPolicy->addAllowedOrigin($origin);
-	}
+    /**
+     * Adds an allowed origin
+     *
+     * @param array $origin
+     */
+    public function addAllowedOrigin($origin)
+    {
+        $this->originPolicy->addAllowedOrigin($origin);
+    }
 }

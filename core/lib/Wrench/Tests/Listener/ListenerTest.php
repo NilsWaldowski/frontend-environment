@@ -7,15 +7,17 @@ use Wrench\Tests\Test;
 /**
  * Payload test
  */
-abstract class ListenerTest extends Test {
-	/**
-	 * @depends testConstructor
-	 */
-	public function testListen($instance) {
-		$server = $this->getMock('Wrench\Server', array(), array(), '', FALSE);
+abstract class ListenerTest extends Test
+{
+    /**
+     * @depends testConstructor
+     */
+    public function testListen($instance)
+    {
+        $server = $this->getMock('Wrench\Server', array(), array(), '', false);
 
-		$instance->listen($server);
-	}
+        $instance->listen($server);
+    }
 
-	abstract public function testConstructor();
+    abstract public function testConstructor();
 }

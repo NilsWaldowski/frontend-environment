@@ -7,14 +7,16 @@ use Wrench\Exception\PayloadException;
 
 /**
  * Gets a HyBi payload
- *
  * @author Dominic
+ *
  */
-class HybiPayload extends Payload {
-	/**
-	 * @see Wrench\Payload.Payload::getFrame()
-	 */
-	protected function getFrame() {
-		return new HybiFrame();
-	}
+class HybiPayload extends Payload
+{
+    /**
+     * @see Wrench\Payload.Payload::getFrame()
+     */
+    protected function getFrame()
+    {
+        return new HybiFrame();
+    }
 }
