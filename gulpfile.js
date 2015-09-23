@@ -129,6 +129,11 @@ gulp.task('css', function () {
 		.pipe(gulp.dest(dest_css))
 		.pipe(gulp.dest(pl_public_css))
 
+		// rename file and write again (just in case the .min files are used in development stage already)
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(dest_css))
+		.pipe(gulp.dest(pl_public_css))
+
 		.pipe(notify({
 			title: 'CSS task complete my Master!',
 			message: 'Have a nice day!'
@@ -189,6 +194,11 @@ gulp.task('js', function () {
 		.pipe(concat('javascript.js'))
 
 		// write concatenated but not minified files
+		.pipe(gulp.dest(dest_js))
+		.pipe(gulp.dest(pl_public_js))
+
+		// rename file and write again (just in case the .min files are used in development stage already)
+		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(dest_js))
 		.pipe(gulp.dest(pl_public_js))
 
