@@ -5,8 +5,8 @@
  * Which objects and abstractions would you like to use?
  * --------------------------------------------------------------------------
  */
-$use-susy-grids: false;
-$use-rules: true;
+$use-susy-grids: 	false;
+$use-rules: 		true;
 
 /**
  * Tell CPS-Framework when breakpoints start.
@@ -14,13 +14,12 @@ $use-rules: true;
  * --------------------------------------------------------------------------
  * You can add more breakpoints in /css/scss/base/_mixins.scss --> @mixin bp
  */
-$mobile-first: false;
-//if mobile first is true the breakpoints values are min-values
+$mobile-first: 		false; //if mobile first is true the breakpoints values are min-values
 
-$bp-small: 570px;
-$bp-medium-small: 768px;
-$bp-medium: 1024px;
-$bp-large: 1280px;
+$bp-small: 			570px;
+$bp-medium-small: 	768px;
+$bp-medium: 		1024px;
+$bp-large: 			1280px;
 
 /*------------------------------------*\
    CPS-Briefing starts HERE
@@ -30,12 +29,14 @@ $bp-large: 1280px;
  * Utility font sizes
  * --------------------------------------------------------------------------
  */
-$base-font-size: 16;
-$base-font-size-medium: 16;
-$base-font-size-small: 16;
-$base-line-height: 1.375;
-$base-line-height-medium: 1.25;
-$base-line-height-small: 1.25;
+$base-font-size: 			18;	// big screen
+$base-font-size-large: 		16;	// "normal" desktop
+$base-font-size-medium: 	16;	// tablet
+$base-font-size-small: 		16;	// smartphone
+$base-line-height: 			1.375;
+$base-line-height-large: 	1.25;
+$base-line-height-medium: 	1.25;
+$base-line-height-small:	1.25;
 
 /**
  * Base spacing units
@@ -43,23 +44,17 @@ $base-line-height-small: 1.25;
  * This section defines spacing behavior for p, ul, ol, csc-content, csc-frames, hr, forms, ...
  * If you use it you get a global spacing depending on the main font-size
  */
-$use-global-spacing: true !default;
-// you should use this! Its awesome! ;)
+$use-global-spacing: 		true !default;
 
 // helper classes - every space-after is based on the main-font-size
 $space: $base-font-size;
 
-$space-label: $space * 0.5;
-// label
-$space-input: $space * 0.75;
-// input & textarea
-$space-element: $space * 2;
-// i.e. p, ul, ol: is converted into EMs in order to have a relation between base-font-size and the space after the typographical element
-$space-module: $space * 3;
-// i.e. csc-content, csc-frames: is applied as PX value in order to keep space that has little typographical context
+$space-label: $space * 		0.5; 	// label
+$space-input: $space * 		0.75; 	// input & textarea
+$space-element: $space * 	2; 		// i.e. p, ul, ol: is converted into EMs in order to have a relation between base-font-size and the space after the typographical element
+$space-module: $space * 	3; 		// i.e. csc-content, csc-frames: is applied as PX value in order to keep space that has little typographical context
 
-$space-module-half: $space-module / 2;
-// for csc-frame-rulerAfter & csc-frame-rulerBefore where we need to split the value
+$space-module-half: $space-module / 2; // for csc-frame-rulerAfter & csc-frame-rulerBefore where we need to split the value
 
 /**
  * Base colors
@@ -67,12 +62,12 @@ $space-module-half: $space-module / 2;
  * This $c-color is simply serving as a placeholder, and is not used.
  */
 
-$c-black: #000000;
-$c-white: #FFFFFF;
+$c-black: 		#000000;
+$c-white: 		#FFFFFF;
 
-$c-error: red;
-$c-valid: green;
-$c-disabled: grey;
+$c-error: 		red;
+$c-valid: 		green;
+$c-disabled:	grey;
 
 /**
  * Color Usage
@@ -81,38 +76,38 @@ $c-disabled: grey;
  */
 
 // base typography
-$c-font-main: $c-black;
-$c-font-link: $c-black;
+$c-font-main: 			$c-black;
+$c-font-link: 			$c-black;
 
 // border & forms (line before & after, inputs, hr, tables)
-$c-border-color: #CCCCCC;
-$ui-round: 3px;
+$c-border-color: 		#CCCCCC;
+$ui-round: 				3px;
 
 // buttons
-$c-btn-bg-default: #333333;
-$c-btn-typo-default: #FFFFFF;
+$c-btn-bg-default: 		#333333;
+$c-btn-typo-default: 	#FFFFFF;
 
 // tables
-$c-table-border: $c-border-color;
-$c-table-head: #FFFFFF;
-$c-table-head-bg: #333333;
-$c-table-odd-bg: #EEEEEE;
-$c-table-even-bg: #FFFFFF;
+$c-table-border: 		$c-border-color;
+$c-table-head: 			#FFFFFF;
+$c-table-head-bg: 		#333333;
+$c-table-odd-bg: 		#EEEEEE;
+$c-table-even-bg: 		#FFFFFF;
 
 // form placeholder
-$c-font-ph: #CCCCCC;
+$c-font-ph: 			#CCCCCC;
 
 // custom selection (if the user marks something)
-$use-custom-selection: true;
-$c-selection: #333333;
-$c-selection-text: #FFFFFF;
+$use-custom-selection: 	true;
+$c-selection: 			#333333;
+$c-selection-text: 		#FFFFFF;
 
 /**
  * Base Font Families
  * --------------------------------------------------------------------------
  */
-$base-font-family: Arial, Georgia, serif;
-$base-font-family-2: Verdana, Arial, Georgia, serif;
+$base-font-family: 		Arial, Georgia, serif;
+$base-font-family-2: 	Verdana, Arial, Georgia, serif;
 
 /**
  * Heading font sizes
@@ -128,125 +123,128 @@ $browser-context: $base-font-size;
 	@return #{$pixels/$context}em
 }
 
-$h1-font-family: $base-font-family;
-$h1-weight: normal;
-$h1-size: 48;
-// px values! (will be converted into ems automatically)
-$h1-size-medium: 40;
-$h1-size-small: 32;
-$h1-line: 1.05;
-$h1-line-medium: 1.125;
-$h1-line-small: 1.25;
-$h1-color: $c-font-main;
-$h1-ma-bo: 0.25em;
-// has to be EM value because the context size (the font-size) changes over the breakpoints
+$h1-font-family: 		$base-font-family;
+$h1-weight: 			normal;
+$h1-size: 				48px;
+$h1-size-large: 		48px;
+$h1-size-medium: 		40px;
+$h1-size-small: 		32px;
+$h1-line: 				1.05;
+$h1-line-large: 		1.05;
+$h1-line-medium: 		1.125;
+$h1-line-small: 		1.25;
+$h1-color: 				$c-font-main;
+$h1-ma-bo: 				0.25em; // has to be EM value because the context size (the font-size) changes over the breakpoints
 
-$h2-font-family: $base-font-family;
-$h2-weight: normal;
-$h2-size: 36;
-$h2-size-medium: 32;
-$h2-size-small: 26;
-$h2-line: 1.25;
-$h2-line-medium: 1.25;
-$h2-line-small: 1.15;
-$h2-color: $c-font-main;
-$h2-ma-bo: 0.35em;
+$h2-font-family: 		$base-font-family;
+$h2-weight: 			normal;
+$h2-size: 				36px;
+$h2-size-large: 		36px;
+$h2-size-medium: 		32px;
+$h2-size-small: 		26px;
+$h2-line: 				1.25;
+$h2-line-large: 		1.25;
+$h2-line-medium: 		1.25;
+$h2-line-small: 		1.15;
+$h2-color: 				$c-font-main;
+$h2-ma-bo: 				0.35em;
 
-$h3-font-family: $base-font-family;
-$h3-weight: normal;
-$h3-size: 28;
-$h3-size-medium: 24;
-$h3-size-small: 22;
-$h3-line: 1.25;
-$h3-line-medium: 1.25;
-$h3-line-small: 1.13;
-$h3-color: $c-font-main;
-$h3-ma-bo: 0.45em;
+$h3-font-family: 		$base-font-family;
+$h3-weight: 			normal;
+$h3-size: 				28px;
+$h3-size-large: 		28px;
+$h3-size-medium: 		24px;
+$h3-size-small: 		22px;
+$h3-line: 				1.25;
+$h3-line-large: 		1.25;
+$h3-line-medium: 		1.25;
+$h3-line-small: 		1.13;
+$h3-color: 				$c-font-main;
+$h3-ma-bo: 				0.45em;
 
-$h4-font-family: $base-font-family;
-$h4-weight: bold;
-$h4-size: 18;
-$h4-size-medium: 18;
-$h4-size-small: 18;
-$h4-line: 1.22;
-$h4-line-medium: 1.22;
-$h4-line-small: 1.11;
-$h3-color: $c-font-main;
-$h4-ma-bo: 0.55em;
+$h4-font-family: 		$base-font-family;
+$h4-weight: 			bold;
+$h4-size: 				18px;
+$h4-size-large: 		18px;
+$h4-size-medium: 		18px;
+$h4-size-small: 		18px;
+$h4-line: 				1.22;
+$h4-line-large: 		1.22;
+$h4-line-medium: 		1.22;
+$h4-line-small: 		1.11;
+$h3-color: 				$c-font-main;
+$h4-ma-bo: 				0.55em;
 
 /*
  * h4 & h5 are usually the same size as base-font-size but with different styling (therefore we didn't create breakpoint behaviour in advance)
  */
-$h5-font-family: $base-font-family;
-$h5-weight: 700;
-$h5-size: em($base-font-size);
-$h5-line: $base-line-height;
-$h5-color: $c-font-main;
-$h5-ma-bo: 0.4em;
+$h5-font-family: 		$base-font-family;
+$h5-weight: 			700;
+$h5-size: 				16px;
+$h5-line: 				$base-line-height;
+$h5-color: 				$c-font-main;
+$h5-ma-bo: 				0.4em;
 
-$h6-font-family: $base-font-family;
-$h6-weight: 700;
-$h6-size: em($base-font-size);
-$h6-line: $base-line-height;
-$h6-color: $c-font-main;
-$h6-ma-bo: 0.4em;
+$h6-font-family: 		$base-font-family;
+$h6-weight: 			700;
+$h6-size: 				16px;
+$h6-line: 				$base-line-height;
+$h6-color: 				$c-font-main;
+$h6-ma-bo: 				0.4em;
 
 /**
  * List styles (ul, ol)
  * --------------------------------------------------------------------------
  */
-$list-male: 3em;
-$list-mato: 0.3em;
-$list-mabo: 0.3em;
-$list-type: disc;
+$list-male: 			3em;
+$list-mato: 			0.3em;
+$list-mabo: 			0.3em;
+$list-type: 			disc;
 
 /**
  * Intro Text
  * --------------------------------------------------------------------------
  */
-$intro-font-family: $base-font-family;
-$intro-weight: normal;
-$intro-style: italic;
-$intro-size: 34;
-// px values! (will be converted into ems automatically)
-$intro-size-medium: 30;
-$intro-size-small: 26;
-$intro-line: 1.05;
-$intro-line-medium: 1.125;
-$intro-line-small: 1.25;
-$intro-color: grey;
-$intro-ma-bo: 1em;
+$intro-font-family: 	$base-font-family;
+$intro-weight: 			normal;
+$intro-style: 			italic;
+$intro-size: 			34px;
+$intro-size-medium: 	30px;
+$intro-size-small: 		26px;
+$intro-line: 			1.05;
+$intro-line-medium: 	1.125;
+$intro-line-small: 		1.25;
+$intro-color: 			grey;
+$intro-ma-bo: 			1em;
 
 /**
  * Testimonial
  * --------------------------------------------------------------------------
  */
-$testimonial-font-family: $base-font-family;
-$testimonial-weight: normal;
-$testimonial-style: italic;
-$testimonial-size: 34;
-// px values! (will be converted into ems automatically)
-$testimonial-size-medium: 30;
-$testimonial-size-small: 26;
-$testimonial-line: 1.05;
-$testimonial-line-medium: 1.125;
-$testimonial-line-small: 1.25;
-$testimonial-color: lightblue;
-$testimonial-ma-bo: 1em;
+$testimonial-font-family: 	$base-font-family;
+$testimonial-weight: 		normal;
+$testimonial-style: 		italic;
+$testimonial-size: 			34px;
+$testimonial-size-medium: 	30px;
+$testimonial-size-small: 	26px;
+$testimonial-line:			1.05;
+$testimonial-line-medium: 	1.125;
+$testimonial-line-small: 	1.25;
+$testimonial-color: 		lightblue;
+$testimonial-ma-bo: 		1em;
 
 /**
  * Images
  * --------------------------------------------------------------------------
  */
-$image-cation-font-family: $base-font-family;
-$image-cation-size: em(12);
-//px or em whatever you prefer
-$image-cation-line: inherit;
-$image-cation-mato: 3px;
-$image-cation-mabo: 3px;
-$image-cation-pad: 0 0 0 0;
-$image-cation-bg: #FFFFFF;
-$image-cation-color: $c-font-main;
+$image-cation-font-family:	$base-font-family;
+$image-cation-size: 		12px;
+$image-cation-line: 		inherit;
+$image-cation-mato: 		3px;
+$image-cation-mabo: 		3px;
+$image-cation-pad:			 0 0 0 0;
+$image-cation-bg: 			#FFFFFF;
+$image-cation-color: 		$c-font-main;
 
 /*------------------------------------*\
    CPS-Briefing ends HERE
@@ -256,20 +254,20 @@ $image-cation-color: $c-font-main;
  * Animations
  * --------------------------------------------------------------------------
  */
-$ui-anim-fast: .2s;
-$ui-anim-slowt: .4s;
+$ui-anim-fast: 		.2s;
+$ui-anim-slowt: 	.4s;
 
 /**
  * Frames (rule before, rule after)
  * --------------------------------------------------------------------------
  */
-$ui-rules-border: $c-border-color;
+$ui-rules-border: 	$c-border-color;
 
 /**
  * z-Index
  * --------------------------------------------------------------------------
  */
-$zLogo: 9;
-$zIndexOne: 1;
-$zOverlay: 99;
-$zHeader: 100;
+$zLogo: 			9;
+$zIndexOne: 		1;
+$zOverlay: 			99;
+$zHeader: 			100;

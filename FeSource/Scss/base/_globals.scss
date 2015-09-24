@@ -27,6 +27,11 @@ body {
 	@include px-rem(font-size, $base-font-size);
 	line-height: $base-line-height;
 
+	@include bp(large) {
+		@include px-rem(font-size, $base-font-size-large);
+		line-height: $base-line-height-large;
+	}
+
 	@include bp(medium) {
 		@include px-rem(font-size, $base-font-size-medium);
 		line-height: $base-line-height-medium;
