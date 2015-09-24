@@ -4,7 +4,7 @@ code, kbd, pre, samp {
 }
 
 .intro {
-	font-size: em($intro-size);
+	font-size: $intro-size;
 	margin-bottom: $intro-ma-bo;
 	font-weight: $intro-weight;
 	font-style: $intro-style;
@@ -13,17 +13,17 @@ code, kbd, pre, samp {
 	color: $intro-color;
 
 	@include bp(medium) {
-		font-size: em($intro-size-medium);
+		font-size: $intro-size-medium;
 		line-height: $intro-line-medium;
 	}
 	@include bp(medium-small) {
-		font-size: em($intro-size-small);
+		font-size: $intro-size-small;
 		line-height: $intro-line-small;
 	}
 }
 
 .testimonial {
-	font-size: em($testimonial-size);
+	font-size: $testimonial-size;
 	margin-bottom: $testimonial-ma-bo;
 	font-weight: $testimonial-weight;
 	font-style: $testimonial-style;
@@ -32,11 +32,11 @@ code, kbd, pre, samp {
 	color: $testimonial-color;
 
 	@include bp(medium) {
-		font-size: em($testimonial-size-medium);
+		font-size: $testimonial-size-medium;
 		line-height: $testimonial-line-medium;
 	}
 	@include bp(medium-small) {
-		font-size: em($testimonial-size-small);
+		font-size: $testimonial-size-small;
 		line-height: $testimonial-line-small;
 	}
 }
