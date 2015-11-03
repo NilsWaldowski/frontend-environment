@@ -4,41 +4,17 @@
 
 table {
 	width: 100%;
-}
 
-th,
-td {
-	text-align: left;
-}
-
-/**
- * Cell alignments
- */
-[colspan] {
-	text-align: center;
-}
-
-[colspan="1"] {
-	text-align: left;
-}
-
-[rowspan] {
-	vertical-align: middle;
-}
-
-[rowspan="1"] {
-	vertical-align: top;
-}
-
-.numerical {
-	text-align: right;
+	th,
+	td {
+		text-align: left;
+	}
 }
 
 /**
- * Bordered tables
+ * Bordered tables (no bg-colors)
  */
-
-table, table.table--bordered {
+table.table--bordered {
 
 	th,
 	td {
@@ -59,9 +35,9 @@ table, table.table--bordered {
 }
 
 /**
- * Striped tables
+ * Striped tables (colors)
  */
-table, table.table--striped {
+table.table--striped {
 
 	th {
 		background: $c-table-head-bg;

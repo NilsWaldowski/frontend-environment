@@ -25,7 +25,7 @@
 	color: $c-btn-typo-default;
 
 	border-radius: $ui-round;
-	transition: all $ui-anim-fast ease-out;
+	transition: all .2s ease-out;
 
 	/* UI States */
 	&:hover,
