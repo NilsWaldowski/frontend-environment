@@ -4,8 +4,8 @@
 		flow: ltr,
 		math: fluid,
 		output: float,
-		gutter-position: after, // http://susydocs.oddbird.net/en/latest/settings/#column-width
-		container: 960, // could be also auto | 80% | 70em | 1200px
+		//gutter-position: after, // http://susydocs.oddbird.net/en/latest/settings/#column-width
+		container: 960px, // could be also auto | 80% | 70em | 1200px
 		container-position: center, // left right center
 		columns: 12, // number | list if asymmetric layouts are needed - i.e. "1 1 2 3 5 8 13"
 		gutters: 0.2, // ratio of gutter space
@@ -31,9 +31,12 @@
 		container: 100%
 	);
 
-	.l-container {
+	/*
+	// Usage example
+	.g-container {
 		@include container;
 	}
+
 	.content-main {
 		@include span(18 of 24);
 
@@ -48,4 +51,6 @@
 			@include span(24 of 24 last);
 		}
 	}
+	*/
+
 }
