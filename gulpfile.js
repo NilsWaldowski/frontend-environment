@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	base64 = require('gulp-base64'),
-	cmq = require('gulp-combine-media-queries'),
+	cmq = require('gulp-merge-media-queries'),
 
 // Files
 	concat = require('gulp-concat'),
