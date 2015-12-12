@@ -211,6 +211,11 @@ gulp.task('js', function () {
 
 		// write original files
 		.pipe(gulp.dest(dest_js_enhance))
+		.pipe(gulp.dest(pl_public_js_enhance))
+
+		// rename file and write again (just in case the .min files are used in development stage already)
+		.pipe(rename({suffix: '.min'}))
+		.pipe(gulp.dest(dest_js_enhance))
 		.pipe(gulp.dest(pl_public_js_enhance));
 
 });
