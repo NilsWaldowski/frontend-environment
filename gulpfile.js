@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	autoprefixer = require('gulp-autoprefixer'),
 	base64 = require('gulp-base64'),
-	cmq = require('gulp-combine-media-queries'),
+	cmq = require('gulp-merge-media-queries'),
 
 // Files
 	concat = require('gulp-concat'),
@@ -210,6 +210,11 @@ gulp.task('js', function () {
 	var enhancement = gulp.src(src_js_enhance + '/**/*.js')
 
 		// write original files
+		.pipe(gulp.dest(dest_js_enhance))
+		.pipe(gulp.dest(pl_public_js_enhance))
+
+		// rename file and write again (just in case the .min files are used in development stage already)
+		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest(dest_js_enhance))
 		.pipe(gulp.dest(pl_public_js_enhance));
 

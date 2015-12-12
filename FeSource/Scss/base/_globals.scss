@@ -1,11 +1,3 @@
-/**
- * $GLOBALS
- * ==========================================================================
- * Here are any base styles added to all elements (*), <html> or <body>.
- * If adding a background image or color to the body, I'd suggest doing
- * that here as well.
- */
-
 * {
 	&,
 	&:before,
@@ -17,37 +9,45 @@
 html {
 	min-height: 100%;
 	font-size: 100%;
-	box-sizing: border-box;
 }
 
 body {
 	font-family: $base-font-family;
 	color: $c-font-main;
 
-	@include px-rem(font-size, $base-font-size);
+	font-size: $base-font-size;
 	line-height: $base-line-height;
 
 	@include bp(large) {
-		@include px-rem(font-size, $base-font-size-large);
+		font-size: $base-font-size-large;
 		line-height: $base-line-height-large;
 	}
 
 	@include bp(medium) {
-		@include px-rem(font-size, $base-font-size-medium);
+		font-size: $base-font-size-medium;
 		line-height: $base-line-height-medium;
 	}
 
 	@include bp(medium-small) {
-		@include px-rem(font-size, $base-font-size-small);
+		font-size: $base-font-size-small;
 		line-height: $base-line-height-small;
 	}
 }
 
+
+
+
 img, iframe {
 	max-width: 100%;
-	//width: 100%;
 	height: auto;
 }
+
+object {
+	pointer-events: none;
+}
+
+
+
 
 .g-container {
 	max-width: 960px;
@@ -58,15 +58,44 @@ img, iframe {
 	}
 }
 
+
+
+
+// SVG responsive handling --> http://demosthenes.info/blog/744/Make-SVG-Responsive
+.g-svg-container {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	overflow: hidden;
+	width: 100%;
+	padding-bottom: 100%; // depending on the svg ratio - this example has a 1:1 ratio (height / width = ratio)
+	// padding-bottom: 50%; would be used for a 1:2 ratio etc.
+}
+
+.g-svg-content {
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+
+
 .g-clearfix {
 	@include clearfix;
 }
 
-.accessibility,
-.is-visuallyhidden,
-.skiplink {
+
+
+
+.g-accessibility,
+.g-is-visuallyhidden {
 	@include accessibility;
 }
+
+
+
 
 .g-valid {
 	color: $c-error;
@@ -76,35 +105,6 @@ img, iframe {
 	color: $c-valid;
 }
 
-/* Display Classes */
-.g-hide-medium {
-	@include bp(medium) {
-		display: none;
-	}
-}
-
-.g-hide-medium-small {
-	@include bp(medium-small) {
-		display: none;
-	}
-}
-
-.g-hide-small {
-	@include bp(small) {
-		display: none;
-	}
-}
-
-@if $use-custom-selection == true {
-	::-moz-selection {
-		background: $c-selection;
-		color: $c-selection-text;
-		text-shadow: none;
-	}
-
-	::selection {
-		background: $c-selection;
-		color: $c-selection-text;
-		text-shadow: none;
-	}
+.g-disabled {
+	color: $c-disabled;
 }

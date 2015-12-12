@@ -1,7 +1,3 @@
-/*------------------------------------*\
-    $MIXINS
-\*------------------------------------*/
-
 /**
  * When inside (context) selector
  * usage: "@include when-inside(".myOuterClass") {color: red}"
@@ -88,8 +84,7 @@
 }
 
 /**
- * Unstyled Lists
- * usage: "@include list-reset($margin-bottom: true);"
+ * Reset Spacing
  * --------------------------------------------------------------------------
  */
 @mixin space-reset {
@@ -129,9 +124,6 @@
  * usage: "@include bp(small) {...}"
  * --------------------------------------------------------------------------
  */
-$fix-mqs: 0 !default;
-// has to be overwritten in ielt9.scss
-
 @mixin bp($media-query) {
 
 	@if $mobile-first == false {
