@@ -29,12 +29,15 @@ $bp-large: 			1280px;
 
 /**
  * Utility font sizes
+ * if you build a "perfect" accessibility project please use REM-values for every font-size specification
+ * usage: @include px-rem(font-size, value or variable without px unit);
  * --------------------------------------------------------------------------
  */
-$base-font-size: 			18;	// big screen
-$base-font-size-large: 		16;	// "normal" desktop
-$base-font-size-medium: 	16;	// tablet
-$base-font-size-small: 		16;	// smartphone
+$base-font-size-for-calc:	18;		// value without unit for calculation purpose (global element spacing)
+$base-font-size: 			18px;	// big screen
+$base-font-size-large: 		16px;	// "normal" desktop
+$base-font-size-medium: 	16px;	// tablet
+$base-font-size-small: 		16px;	// smartphone
 $base-line-height: 			1.375;
 $base-line-height-large: 	1.25;
 $base-line-height-medium: 	1.25;
@@ -44,22 +47,17 @@ $base-line-height-small:	1.25;
 
 
 /**
- * Base spacing units
+ * Base spacing units in PX (will converted to EMs depending on base font size for desktop)
  * --------------------------------------------------------------------------
  * This section defines spacing behavior for p, ul, ol, csc-content, csc-frames, hr, forms, ...
- * If you use it you get a global spacing depending on the main font-size
  */
 $use-global-spacing: 		true !default;
 
-// helper classes - every space-after is based on the main-font-size
-$space: $base-font-size;
-
-$space-label: $space * 		0.5; 	// label
-$space-input: $space * 		0.75; 	// input & textarea
-$space-element: $space * 	2; 		// i.e. p, ul, ol: is converted into EMs in order to have a relation between base-font-size and the space after the typographical element
-$space-module: $space * 	3; 		// i.e. csc-content, csc-frames: is applied as PX value in order to keep space that has little typographical context
-
-$space-module-half: $space-module / 2; // for csc-frame-rulerAfter & csc-frame-rulerBefore where we need to split the value
+$space-label: 				9;	// label
+$space-input: 				14;	// input & textarea
+$space-element: 			18;	// i.e. p, ul, ol: is converted into EMs in order to have a relation between base-font-size and the space after the typographical element
+$space-module: 				40;	// i.e. csc-content, csc-frames: is applied as PX value in order to keep space that has little typographical context
+$space-module-half: 		$space-module / 2; // for csc-frame-rulerAfter & csc-frame-rulerBefore where we need to split the value
 
 
 
@@ -126,14 +124,6 @@ $base-font-family-2: 	Verdana, Arial, Georgia, serif;
  * - small function to help using pixels but create em values in the context of the base-font-size
  * - font-size values are pixel based but get converted to EMs
  */
-
-// helper function for em calucation
-$browser-context: $base-font-size;
-// Default
-@function em($pixels, $context: $browser-context) {
-	@return #{$pixels/$context}em
-}
-
 $h1-font-family: 		$base-font-family;
 $h1-weight: 			normal;
 $h1-size: 				48px;
@@ -145,7 +135,7 @@ $h1-line-large: 		1.05;
 $h1-line-medium: 		1.125;
 $h1-line-small: 		1.25;
 $h1-color: 				$c-font-main;
-$h1-ma-bo: 				0.25em; // has to be EM value because the context size (the font-size) changes over the breakpoints
+$h1-ma-bo: 				0.25em; // should be EM value because the context size (the font-size) changes over the breakpoints
 
 $h2-font-family: 		$base-font-family;
 $h2-weight: 			normal;

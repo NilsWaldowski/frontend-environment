@@ -15,21 +15,21 @@ body {
 	font-family: $base-font-family;
 	color: $c-font-main;
 
-	@include px-rem(font-size, $base-font-size);
+	font-size: $base-font-size;
 	line-height: $base-line-height;
 
 	@include bp(large) {
-		@include px-rem(font-size, $base-font-size-large);
+		font-size: $base-font-size-large;
 		line-height: $base-line-height-large;
 	}
 
 	@include bp(medium) {
-		@include px-rem(font-size, $base-font-size-medium);
+		font-size: $base-font-size-medium;
 		line-height: $base-line-height-medium;
 	}
 
 	@include bp(medium-small) {
-		@include px-rem(font-size, $base-font-size-small);
+		font-size: $base-font-size-small;
 		line-height: $base-line-height-small;
 	}
 }

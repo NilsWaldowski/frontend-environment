@@ -1,5 +1,12 @@
 @if $use-global-spacing == true {
 
+	// helper function for em calucation
+	$browser-context: $base-font-size-for-calc;
+	// Default
+	@function em($pixels, $context: $browser-context) {
+		@return #{$pixels/$context}em
+	}
+
 	/**
 	 * Base elements
 	 */
