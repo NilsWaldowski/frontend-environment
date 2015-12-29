@@ -1,0 +1,32 @@
+{
+	"src": {
+		"src_icons":		"./FeSource/Icons",
+		"src_img":			"./FeSource/Images",
+		"src_img_edit":		"./FeSource/ImagesEditorial",
+		"src_js":			"./FeSource/Javascript",
+		"src_js_enhance":	"./FeSource/JavascriptEnhancement",
+		"src_scss":			"./FeSource/Scss",
+		"src_fonts":		"./FeSource/Fonts"
+	},
+	"dest": {
+		"base_dir":			"../httpdocs/Templates/Master/Resources",
+		"dest":				"../httpdocs/Templates/Master/Resources/Public/",
+		"dest_css":			"../httpdocs/Templates/Master/Resources/Public/Css",
+		"dest_icons":		"../httpdocs/Templates/Master/Resources/Public/Icons",
+		"dest_img":			"../httpdocs/Templates/Master/Resources/Public/Images",
+		"dest_img_edit":	"../httpdocs/Templates/Master/Resources/Public/ImagesEditorial",
+		"dest_js":			"../httpdocs/Templates/Master/Resources/Public/Javascript",
+		"dest_js_enhance":	"../httpdocs/Templates/Master/Resources/Public/JavascriptEnhancement",
+		"dest_fonts":		"../httpdocs/Templates/Master/Resources/Public/Fonts"
+	},
+	"pl_dest": {
+		"pl_public":				"./public/Templates/Master/Resources/Public/",
+		"pl_public_css":			"./public/Templates/Master/Resources/Public/Css",
+		"pl_public_icons":			"./public/Templates/Master/Resources/Public/Icons",
+		"pl_public_images":			"./public/Templates/Master/Resources/Public/Images",
+		"pl_public_images_edit":	"./public/Templates/Master/Resources/Public/ImagesEditorial",
+		"pl_public_js":				"./public/Templates/Master/Resources/Public/Javascript",
+		"pl_public_js_enhance":		"./public/Templates/Master/Resources/Public/JavascriptEnhancement",
+		"pl_public_fonts":			"./public/Templates/Master/Resources/Public/Fonts"
+	}
+}
