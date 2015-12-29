@@ -15,9 +15,6 @@ module.exports = function (gulp, plugins) {
 			// optimize css files
 			.pipe(plugins.cmq({log: false}))
 
-			// write the optimized versions
-			.pipe(gulp.dest(dirs.dest.dest_css))
-
 			// rename file and minify
 			.pipe(plugins.rename({suffix: '.min'}))
 			.pipe(plugins.minifycss({noAdvanced: true}))
