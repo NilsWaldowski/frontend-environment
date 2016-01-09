@@ -28,5 +28,13 @@
 		"pl_public_js":				"./public/Templates/Master/Resources/Public/Javascript",
 		"pl_public_js_enhance":		"./public/Templates/Master/Resources/Public/JavascriptEnhancement",
 		"pl_public_fonts":			"./public/Templates/Master/Resources/Public/Fonts"
+	},
+	"patternlab": {
+		"public": "./public",
+		"files": [
+			"./source/_patterns/**/*.mustache",
+			"./source/_patterns/**/*.json",
+			"./source/_data/*.json"
+		]
 	}
 }
