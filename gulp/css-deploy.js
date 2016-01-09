@@ -1,7 +1,6 @@
 var dirs = require('./config/dirs.json');
 
 module.exports = function (gulp, plugins) {
-	
 	return function () {
 		gulp.src(dirs.src.src_scss + '/**/*.scss')
 
@@ -19,6 +18,6 @@ module.exports = function (gulp, plugins) {
 			.pipe(plugins.rename({suffix: '.min'}))
 			.pipe(plugins.minifycss({noAdvanced: true}))
 
-			.pipe(gulp.dest(dirs.dest.dest_css))
+			.pipe(gulp.dest(dirs.dest.dest_css));
 	};
 };
