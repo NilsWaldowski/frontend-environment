@@ -1,5 +1,11 @@
 {
 	"title": "CPS-IT Pattern Lab",
+	"css": {
+		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css/screen.css"
+	},
+	"js": {
+		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/javascript.min.js"
+	},
 	"bodyClass": "bodyClass",
 	"img": {
 		"logo": {
