@@ -4,7 +4,7 @@
 		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css/screen.css"
 	},
 	"js": {
-		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/javascript.min.js"
+		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/javascript.js"
 	},
 	"bodyClass": "bodyClass",
 	"img": {
