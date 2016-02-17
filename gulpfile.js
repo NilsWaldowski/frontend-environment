@@ -32,7 +32,9 @@ gulp.task('clean', function (cb) {
 	return del([
 		// here we use a globbing pattern to match everything inside the `mobile` folder
 		dirs.dest.dest + '/**/*',
-		dirs.pl_dest.pl_public + '/**/*'
+		dirs.dest.dest_img_edit + '/**/*',
+		dirs.pl_dest.pl_public + '/**/*',
+		dirs.pl_dest.pl_public_images_edit + '/**/*'
 	], {force: true});
 });
 
@@ -92,6 +94,7 @@ gulp.task('fonts-deploy', getTask('fonts-deploy'));
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 	gulp.watch(dirs.src.src_scss + '/**/*.scss', ['css']);
 	gulp.watch(dirs.src.src_js + '/**/*.js', ['js']);
+	gulp.watch(dirs.src.src_js_enhance + '/**/*.js', ['js']);
 	gulp.watch(dirs.patternlab.files, ['pl-watch']);
 });
 
@@ -127,11 +130,12 @@ gulp.task('init', function () {
 /**
  * Deploy production ready for CMS Integration - Commit to CMS Repository
  */
-gulp.task('deploy', function () {
+gulp.task('deploy', ['clean'], function () {
 
 	gulp.start(
 		'icons-deploy',
 		'img-dev-deploy',
+		'img-edit-deploy',
 		'css-deploy',
 		'js-deploy',
 		'fonts-deploy'
