@@ -89,6 +89,20 @@ gulp.task('fonts-deploy', getTask('fonts-deploy'));
 
 
 /**
+ * All Images combined
+ */
+gulp.task('images', ['clean'], function () {
+	gulp.start(
+		'icons',
+		'img-dev',
+		'img-edit'
+	);
+});
+
+
+
+
+/**
  * Watch
  */
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
