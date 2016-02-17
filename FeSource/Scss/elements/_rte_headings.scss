@@ -86,7 +86,7 @@ h4, .h4 {
 	font-weight: $h4-weight;
 	line-height: $h4-line;
 	font-family: $h4-font-family;
-	color: $h3-color;
+	color: $h4-color;
 
 	@include bp(large) {
 		font-size: $h4-size-large;
