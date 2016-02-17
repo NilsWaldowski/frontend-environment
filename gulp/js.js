@@ -9,7 +9,7 @@ module.exports = function (gulp, plugins) {
 			.pipe(plugins.concat('javascript.js'))
 
 			// write concatenated but not minified files
-			.pipe(gulp.dest(dirs.pl_dest.pl_public_js))
+			.pipe(gulp.dest(dirs.pl_dest.pl_public_js));
 
 		var enhancement = gulp.src(dirs.src.src_js_enhance + '/**/*.js')
 
