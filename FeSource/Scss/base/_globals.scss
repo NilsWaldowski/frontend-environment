@@ -15,22 +15,28 @@ body {
 	font-family: $base-font-family;
 	color: $c-font-main;
 
-	font-size: $base-font-size;
-	line-height: $base-line-height;
+	// desktop font-sizes for core verison
+	font-size: $base-font-size-large;
+	line-height: $base-line-height-large;
 
-	@include bp(large) {
-		font-size: $base-font-size-large;
-		line-height: $base-line-height-large;
-	}
+	.enhanced & {
+		font-size: $base-font-size;
+		line-height: $base-line-height;
 
-	@include bp(medium) {
-		font-size: $base-font-size-medium;
-		line-height: $base-line-height-medium;
-	}
+		@include bp(medium-small) {
+			font-size: $base-font-size-small;
+			line-height: $base-line-height-small;
+		}
 
-	@include bp(medium-small) {
-		font-size: $base-font-size-small;
-		line-height: $base-line-height-small;
+		@include bp(medium) {
+			font-size: $base-font-size-medium;
+			line-height: $base-line-height-medium;
+		}
+
+		@include bp(large) {
+			font-size: $base-font-size-large;
+			line-height: $base-line-height-large;
+		}
 	}
 }
 
@@ -50,12 +56,10 @@ object {
 
 
 .g-container {
-	max-width: 960px;
+	max-width: $bp-max-width;
+	width: $bp-full-width;
 	margin: 0 auto;
-
-	@include bp(1023px) {
-		width: 90%;
-	}
+	@include clearfix;
 }
 
 
