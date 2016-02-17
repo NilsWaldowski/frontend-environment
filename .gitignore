@@ -5,4 +5,5 @@ logs
 npm-debug.log
 node_modules
 source
+public
 config/config.ini
