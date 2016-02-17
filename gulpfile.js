@@ -119,7 +119,7 @@ gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 /**
  * Init (no minifying / file optimization) - Commit to Patternlab Repository
  */
-gulp.task('init', function () {
+gulp.task('init', ['clean'], function () {
 
 	gulp.start(
 		'icons',
