@@ -17,8 +17,10 @@ $use-susy-grids: 	false;
  * --------------------------------------------------------------------------
  * You can add more breakpoints in /css/scss/base/_mixins.scss --> @mixin bp
  */
-$mobile-first: 		false; //if mobile first is true the breakpoints values are min-values
+$mobile-first: 		true; //if mobile first is true the breakpoints values are min-values
 
+$bp-full-width:		90%;
+$bp-max-width:		1190px;
 $bp-small: 			570px;
 $bp-medium-small: 	768px;
 $bp-medium: 		1024px;
@@ -33,15 +35,15 @@ $bp-large: 			1280px;
  * usage: @include px-rem(font-size, value or variable without px unit);
  * --------------------------------------------------------------------------
  */
-$base-font-size-for-calc:	18;		// value without unit for calculation purpose (global element spacing)
-$base-font-size: 			18px;	// big screen
-$base-font-size-large: 		16px;	// "normal" desktop
-$base-font-size-medium: 	16px;	// tablet
-$base-font-size-small: 		16px;	// smartphone
-$base-line-height: 			1.375;
-$base-line-height-large: 	1.25;
-$base-line-height-medium: 	1.25;
+$base-font-size-for-calc:	16;		// value without unit for calculation purpose (global element spacing)
+$base-font-size: 			16px;	// smartphone
+$base-font-size-small: 		16px;	// tablet
+$base-font-size-medium: 	16px;	// "normal" desktop
+$base-font-size-large: 		16px;	// big screen
+$base-line-height: 			1.25;
 $base-line-height-small:	1.25;
+$base-line-height-medium: 	1.25;
+$base-line-height-large: 	1.375;
 
 
 
@@ -126,53 +128,53 @@ $base-font-family-2: 	Verdana, Arial, Georgia, serif;
  */
 $h1-font-family: 		$base-font-family;
 $h1-weight: 			normal;
-$h1-size: 				48px;
+$h1-size: 				32px;
+$h1-size-small: 		40px;
+$h1-size-medium: 		48px;
 $h1-size-large: 		48px;
-$h1-size-medium: 		40px;
-$h1-size-small: 		32px;
 $h1-line: 				1.05;
-$h1-line-large: 		1.05;
-$h1-line-medium: 		1.125;
 $h1-line-small: 		1.25;
+$h1-line-medium: 		1.125;
+$h1-line-large: 		1.05;
 $h1-color: 				$c-font-main;
 $h1-ma-bo: 				0.25em; // should be EM value because the context size (the font-size) changes over the breakpoints
 
 $h2-font-family: 		$base-font-family;
 $h2-weight: 			normal;
-$h2-size: 				36px;
+$h2-size: 				26px;
+$h2-size-small: 		32px;
+$h2-size-medium: 		36px;
 $h2-size-large: 		36px;
-$h2-size-medium: 		32px;
-$h2-size-small: 		26px;
 $h2-line: 				1.25;
-$h2-line-large: 		1.25;
-$h2-line-medium: 		1.25;
 $h2-line-small: 		1.15;
+$h2-line-medium: 		1.25;
+$h2-line-large: 		1.25;
 $h2-color: 				$c-font-main;
 $h2-ma-bo: 				0.35em;
 
 $h3-font-family: 		$base-font-family;
 $h3-weight: 			normal;
-$h3-size: 				28px;
+$h3-size: 				22px;
+$h3-size-small: 		24px;
+$h3-size-medium: 		28px;
 $h3-size-large: 		28px;
-$h3-size-medium: 		24px;
-$h3-size-small: 		22px;
 $h3-line: 				1.25;
-$h3-line-large: 		1.25;
-$h3-line-medium: 		1.25;
 $h3-line-small: 		1.13;
+$h3-line-medium: 		1.25;
+$h3-line-large: 		1.25;
 $h3-color: 				$c-font-main;
 $h3-ma-bo: 				0.45em;
 
 $h4-font-family: 		$base-font-family;
 $h4-weight: 			bold;
 $h4-size: 				18px;
-$h4-size-large: 		18px;
-$h4-size-medium: 		18px;
 $h4-size-small: 		18px;
+$h4-size-medium: 		18px;
+$h4-size-large: 		18px;
 $h4-line: 				1.22;
-$h4-line-large: 		1.22;
-$h4-line-medium: 		1.22;
 $h4-line-small: 		1.11;
+$h4-line-medium: 		1.22;
+$h4-line-large: 		1.22;
 $h4-color: 				$c-font-main;
 $h4-ma-bo: 				0.55em;
 
