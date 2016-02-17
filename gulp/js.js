@@ -3,7 +3,7 @@ var dirs = require('./config/dirs.json');
 module.exports = function (gulp, plugins) {
 	return function () {
 
-		var normaljs = gulp.src(dirs.src.src_js + '/**/*.js')
+		var normaljs = gulp.src([dirs.src.src_js + '/**/*.js', dirs.src.src_js_additional  + '/**/*.js'])
 
 			// concatenate js files
 			.pipe(plugins.concat('javascript.js'))

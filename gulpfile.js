@@ -94,6 +94,7 @@ gulp.task('fonts-deploy', getTask('fonts-deploy'));
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 	gulp.watch(dirs.src.src_scss + '/**/*.scss', ['css']);
 	gulp.watch(dirs.src.src_js + '/**/*.js', ['js']);
+	gulp.watch(dirs.src.src_js_additional + '/**/*.js', ['js']);
 	gulp.watch(dirs.src.src_js_enhance + '/**/*.js', ['js']);
 	gulp.watch(dirs.patternlab.files, ['pl-watch']);
 });

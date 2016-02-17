@@ -28,7 +28,6 @@
 		"pl_public_images":			"./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images",
 		"pl_public_images_edit":	"./public/fileadmin/user_upload/PreparedImages",
 		"pl_public_js":				"./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript",
-		"pl_public_js_additional":	"./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptAdditional",
 		"pl_public_js_enhance":		"./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement",
 		"pl_public_fonts":			"./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Fonts"
 	},
