@@ -6,6 +6,9 @@
 	"js": {
 		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/javascript.js"
 	},
+	"js_html5shiv": {
+		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement/html5shiv.js"
+	},
 	"bodyClass": "bodyClass",
 	"img": {
 		"logo": {

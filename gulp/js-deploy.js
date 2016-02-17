@@ -15,6 +15,17 @@ module.exports = function (gulp, plugins) {
 			// write the uglified files in the same directories
 			.pipe(gulp.dest(dirs.dest.dest_js));
 
+		var additionalJs = gulp.src(dirs.src.src_js_additional  + '/**/*.js')
+
+			.pipe(gulp.dest(dirs.dest.dest_js_additional))
+
+			// uglify that shit
+			.pipe(plugins.rename({suffix: '.min'}))
+			.pipe(plugins.uglify())
+
+			// write the uglified files in the same directories
+			.pipe(gulp.dest(dirs.dest.dest_js_additional));
+
 		var enhancement = gulp.src(dirs.src.src_js_enhance + '/**/*.js')
 
 			// uglify that shit
