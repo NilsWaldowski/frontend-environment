@@ -112,6 +112,8 @@ gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
  * Init (no minifying / file optimization) - Commit to Patternlab Repository
  */
 gulp.task('init', ['clean'], function () {
+	// set environment variable by hand
+	options.env = 'development';
 
 	gulp.start(
 		'icons',
@@ -138,14 +140,19 @@ gulp.task('init', ['clean'], function () {
  * Deploy production ready for CMS Integration - Commit to CMS Repository
  */
 gulp.task('deploy', ['clean'], function () {
+	// set environment variable by hand
+	options.env = 'production';
+	// set dir.dest to production
+	// @see above where config is included
+	options.dirs.dest = options.dirs[options.env].dest;
 
 	gulp.start(
-		'icons-deploy',
-		'img-dev-deploy',
-		'img-edit-deploy',
-		'css-deploy',
-		'js-deploy',
-		'fonts-deploy'
+		'icons',
+		'img-dev',
+		'img-edit',
+		'css',
+		'js',
+		'fonts'
 	);
 
 	notifier.notify({
