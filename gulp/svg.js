@@ -1,10 +1,9 @@
-var dirs = require('./config/dirs.json');
 
-module.exports = function (gulp, plugins) {
+module.exports = function (gulp, plugins, options) {
 	return function () {
-		gulp.src(dirs.src.src_icons + '/**/*.svg')
+		gulp.src(options.dirs.src.icons + '/**/*.svg')
 
 			.pipe(plugins.svgmin())
-			.pipe(gulp.dest(dirs.pl_dest.pl_public_icons));
+			.pipe(gulp.dest(options.dirs.dest.icons));
 	};
 };

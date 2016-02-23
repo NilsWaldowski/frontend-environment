@@ -1,8 +1,7 @@
-var dirs = require('./config/dirs.json');
 
 module.exports = function (gulp, plugins, options) {
 	return function () {
-		gulp.src(dirs.src.src_scss + '/**/*.scss')
+		gulp.src(options.dirs.src.scss + '/**/*.scss')
 
 			// compile scss files
 			.pipe(plugins.sass({
@@ -20,15 +19,12 @@ module.exports = function (gulp, plugins, options) {
 			// optimize css files
 			.pipe(plugins.cmq({log: false}))
 
-			.pipe(
-				gulp.dest(dirs.pl_dest.pl_public_css)
-			)
 			// only on production
 			.pipe(plugins.gulpif(
 				options.env === 'production',
 				plugins.rename({suffix: '.min'}),
-				plugins.minifycss({noAdvanced: true}),
-				gulp.dest(dirs.dest.dest_css))
-			);
+				plugins.minifycss({noAdvanced: true})
+			)
+			.pipe(gulp.dest(options.dirs.dest.css)));
 	};
 };

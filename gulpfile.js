@@ -25,7 +25,8 @@ var notifier = require('node-notifier'),
  * Load Json files with directories
  */
 options.dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
-
+// set dest to environment (production or development) to get the specific path settings
+options.dirs.dest = options.dirs[options.env].dest;
 
 
 
@@ -35,10 +36,7 @@ options.dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
 gulp.task('clean', function (cb) {
 	return del([
 		// here we use a globbing pattern to match everything inside the `mobile` folder
-		options.dirs.dest.dest + '/**/*',
-		options.dirs.dest.dest_img_edit + '/**/*',
-		options.dirs.pl_dest.pl_public + '/**/*',
-		options.dirs.pl_dest.pl_public_images_edit + '/**/*'
+		options.dirs.dest.base + '/**/*'
 	], {force: true});
 });
 
@@ -65,31 +63,21 @@ gulp.task('pl-generate', getTask('pl-generate'));
 
 /** CSS */
 gulp.task('css', getTask('css'));
-gulp.task('css-deploy', getTask('css-deploy'));
 
 /** JS */
 gulp.task('js', getTask('js'));
-gulp.task('js-deploy', getTask('js-deploy'));
 
 /** Images */
 gulp.task('img-dev', getTask('img-dev'));
-gulp.task('img-dev-deploy', getTask('img-dev-deploy'));
 gulp.task('img-edit', getTask('img-edit'));
-gulp.task('img-edit-deploy', getTask('img-edit-deploy'));
 
 /** SVG Icons */
 gulp.task('svg', getTask('svg'));
-gulp.task('svg-deploy', getTask('svg-deploy'));
 gulp.task('png', getTask('png'));
-gulp.task('png-deploy', getTask('png-deploy'));
 gulp.task('icons', ['svg', 'png']);
-gulp.task('icons-deploy', ['svg-deploy', 'png-deploy']);
 
 /** Fonts */
 gulp.task('fonts', getTask('fonts'));
-gulp.task('fonts-deploy', getTask('fonts-deploy'));
-
-
 
 
 /**
