@@ -3,6 +3,7 @@
  */
 var notifier = require('node-notifier'),
 	gulp = require('gulp'),
+	minimist = require('minimist'),
 	del = require('del'),
 	fs = require('fs'),
 	plugins = require('gulp-load-plugins')({
@@ -10,17 +11,20 @@ var notifier = require('node-notifier'),
 		rename: {
 			'gulp-merge-media-queries': 'cmq',
 			'gulp-minify-css': 'minifycss',
+			'gulp-if': 'gulpif',
 			'imagemin-pngquant': 'pngquant'
 		}
-	});
-
-
-
+	}),
+	knownOptions = {
+		string: 'env',
+		default: { env: process.env.NODE_ENV || 'development' }
+	},
+	options = minimist(process.argv.slice(2), knownOptions);
 
 /**
  * Load Json files with directories
  */
-var dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
+options.dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
 
 
 
@@ -31,10 +35,10 @@ var dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
 gulp.task('clean', function (cb) {
 	return del([
 		// here we use a globbing pattern to match everything inside the `mobile` folder
-		dirs.dest.dest + '/**/*',
-		dirs.dest.dest_img_edit + '/**/*',
-		dirs.pl_dest.pl_public + '/**/*',
-		dirs.pl_dest.pl_public_images_edit + '/**/*'
+		options.dirs.dest.dest + '/**/*',
+		options.dirs.dest.dest_img_edit + '/**/*',
+		options.dirs.pl_dest.pl_public + '/**/*',
+		options.dirs.pl_dest.pl_public_images_edit + '/**/*'
 	], {force: true});
 });
 
@@ -46,7 +50,7 @@ gulp.task('clean', function (cb) {
  * http://macr.ae/article/splitting-gulpfile-multiple-files.html
  */
 function getTask(task) {
-	return require('./gulp/' + task)(gulp, plugins);
+	return require('./gulp/' + task)(gulp, plugins, options);
 }
 
 
@@ -106,11 +110,11 @@ gulp.task('images', function () {
  * Watch
  */
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
-	gulp.watch(dirs.src.src_scss + '/**/*.scss', ['css']);
-	gulp.watch(dirs.src.src_js + '/**/*.js', ['js']);
-	gulp.watch(dirs.src.src_js_additional + '/**/*.js', ['js']);
-	gulp.watch(dirs.src.src_js_enhance + '/**/*.js', ['js']);
-	gulp.watch(dirs.patternlab.files, ['pl-watch']);
+	gulp.watch(options.dirs.src.src_scss + '/**/*.scss', ['css']);
+	gulp.watch(options.dirs.src.src_js + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.src_js_additional + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.src_js_enhance + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.patternlab.files, ['pl-watch']);
 });
 
 
