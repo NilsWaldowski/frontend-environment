@@ -4,6 +4,14 @@ module.exports = function (gulp, plugins) {
 	return function () {
 
 		var normaljs = gulp.src([dirs.src.src_js + '/**/*.js', dirs.src.src_js_additional  + '/**/*.js'])
+			// use jshint
+			.pipe(plugins.jshint())
+
+			// use jslint
+			.pipe(plugins.jscs())
+
+			// fail if error found
+			.pipe(plugins.jscs.reporter('fail'))
 
 			// concatenate js files
 			.pipe(plugins.concat('javascript.js'))

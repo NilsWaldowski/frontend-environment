@@ -10,7 +10,8 @@ var notifier = require('node-notifier'),
 		rename: {
 			'gulp-merge-media-queries': 'cmq',
 			'gulp-minify-css': 'minifycss',
-			'imagemin-pngquant': 'pngquant'
+			'imagemin-pngquant': 'pngquant',
+			'gulp-scss-lint': 'scsslint'
 		}
 	});
 

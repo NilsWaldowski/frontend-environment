@@ -3,7 +3,7 @@ var dirs = require('./config/dirs.json');
 module.exports = function (gulp, plugins) {
 	return function () {
 		gulp.src(dirs.src.src_scss + '/**/*.scss')
-
+			.pipe(plugins.scsslint())
 			// compile scss files
 			.pipe(plugins.sass({
 				style: 'expanded'
