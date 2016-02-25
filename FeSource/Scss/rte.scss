@@ -2,20 +2,20 @@
  * Base
  * ------------------------------------------------
  */
-@import "base/variables";
-@import "base/mixins";
+@import "01-base/variables";
+@import "01-base/mixins";
 
 
 /**
  * RTE Elements
 * --------------------------------------------------------------------------
 */
-@import "elements/g_elements_spacing";
-@import "elements/g_elements_forms";
-@import "elements/rte_buttons";
-@import "elements/rte_headings";
-@import "elements/rte_links";
-@import "elements/rte_lists";
-@import "elements/rte_rules";
-@import "elements/rte_tables";
-@import "elements/rte_abbr";
+@import "04-elements/g_elements_spacing";
+@import "04-elements/g_elements_forms";
+@import "04-elements/rte_buttons";
+@import "04-elements/rte_headings";
+@import "04-elements/rte_links";
+@import "04-elements/rte_lists";
+@import "04-elements/rte_rules";
+@import "04-elements/rte_tables";
+@import "04-elements/rte_abbr";

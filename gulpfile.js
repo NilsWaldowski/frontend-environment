@@ -28,11 +28,16 @@ var dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
 /**
  * Clean up Task: delete everything in the dest folders
  */
-gulp.task('clean', function (cb) {
+gulp.task('clean-deploy', function (cb) {
 	return del([
 		// here we use a globbing pattern to match everything inside the `mobile` folder
 		dirs.dest.dest + '/**/*',
-		dirs.dest.dest_img_edit + '/**/*',
+		dirs.dest.dest_img_edit + '/**/*'
+	], {force: true});
+});
+gulp.task('clean-pl', function (cb) {
+	return del([
+		// here we use a globbing pattern to match everything inside the `mobile` folder
 		dirs.pl_dest.pl_public + '/**/*',
 		dirs.pl_dest.pl_public_images_edit + '/**/*'
 	], {force: true});
@@ -91,7 +96,7 @@ gulp.task('fonts-deploy', getTask('fonts-deploy'));
 /**
  * All Images combined
  */
-gulp.task('images', ['clean'], function () {
+gulp.task('images', function () {
 	gulp.start(
 		'icons',
 		'img-dev',
@@ -119,7 +124,7 @@ gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 /**
  * Init (no minifying / file optimization) - Commit to Patternlab Repository
  */
-gulp.task('init', ['clean'], function () {
+gulp.task('init', ['clean-pl'], function () {
 
 	gulp.start(
 		'icons',
@@ -145,7 +150,7 @@ gulp.task('init', ['clean'], function () {
 /**
  * Deploy production ready for CMS Integration - Commit to CMS Repository
  */
-gulp.task('deploy', ['clean'], function () {
+gulp.task('deploy', ['clean-deploy'], function () {
 
 	gulp.start(
 		'icons-deploy',

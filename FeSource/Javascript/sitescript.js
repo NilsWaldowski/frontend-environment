@@ -33,6 +33,7 @@ function CpsItAvoidErrors() {
 	/**
 	 * Plugin Usage (init plugin here)
 	 */
+	initBContentTextmedia();
 
 }
 
