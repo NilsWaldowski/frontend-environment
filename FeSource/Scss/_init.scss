@@ -1,55 +1,54 @@
-/**
- * Vendor
- * ------------------------------------------------
- */
 @import "../../node_modules/susy/sass/susy";
-@import "base/normalize";
+@import "01-base/normalize";
 
 
 /**
  * Base
  * ------------------------------------------------
  */
-@import "base/variables";
-@import "base/mixins";
-@import "base/globals";
+@import "01-base/variables";
+@import "01-base/mixins";
+@import "01-base/globals";
 
 
 /**
- * Elements (RTE and global styling)
+ * Vendor
  * ------------------------------------------------
  */
-// RTE Elements are imported within /css/scss/rte.scss (which is imported in the screen.css also)
+@import "02-vendor/magnific-popup";
 
-
-/**
- * Modules
- * ce_ -> custom elements/modules
- * menu_ -> menu modules like main, meta, footer
- * ------------------------------------------------
- */
-@import "modules/menu_main";
-
-
-/**
- * Themes
- * ------------------------------------------------
- */
-@import "themes/default";
 
 
 /**
  * Utilities
  * ------------------------------------------------
  */
-@import "utilities/grid";
+@import "03-utilities/grid";
+
+
+/**
+ * Modules
+ * ------------------------------------------------
+ */
+@import "05-modules/b-content-divider";
+@import "05-modules/b-content-header";
+@import "05-modules/b-content-menu";
+@import "05-modules/b-content-textmedia";
+@import "05-modules/menu_main";
+
+
+/**
+ * Themes
+ * ------------------------------------------------
+ */
+@import "06-themes/default";
 
 
 /**
  * Page Structure & Layouts (i.e. Home, Sub1, Sub2 etc.)
  * ------------------------------------------------
  */
-@import "views/page_header";
-@import "views/page_content";
-@import "views/page_footer";
-@import "views/page_home";
+@import "07-views/page_header";
+@import "07-views/page_content";
+@import "07-views/page_footer";
+@import "07-views/page_home";
