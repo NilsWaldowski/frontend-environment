@@ -18,6 +18,7 @@
     "gulp-merge-media-queries": "^0.2.1",
     "gulp-minify-css": "^1.2.1",
     "gulp-rename": "^1.2.2",
+    "gulp-requirejs-optimize": "^0.3.2",
     "gulp-sass": "^2.0.4",
     "gulp-scss-lint": "^0.3.9",
     "gulp-shell": "^0.4.3",

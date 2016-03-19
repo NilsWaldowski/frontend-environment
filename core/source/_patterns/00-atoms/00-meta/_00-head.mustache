@@ -21,7 +21,16 @@
 	<!-- End Pattern Lab -->
 
 	<meta name="fullcss" content="{{ css.src }}">
+
+	<!-- DEVELOPMENT: RequireJS includes all necessary Modules -->
+	<!-- Info: data-main at the end (before closing body tag) -->
 	<meta name="fulljs" content="{{ js.src }}">
+
+	<!-- PRODUCTION: we build with gulp a single file which contains als necessary modules within -->
+	<!-- meta name="fulljs" content="{{ js.src_live }}" -->
+
+	<!-- Include directly without enhancedmentJs (just for testing purpose) -->
+	<!-- script src="{{ js.src_live }}"></script -->
 
 	<meta name="fonts" content="http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister">
 
@@ -238,6 +247,8 @@
 	<!--[if lt IE 9]>
 	<script src="{{ js_html5shiv.src }}"></script>
 	<![endif]-->
+
+	<script data-main="{{ js.src_config }}"></script>
 
 </head>
 <body class="{{ bodyClass }}">

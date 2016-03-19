@@ -34,13 +34,19 @@ options.dirs.dest = options.dirs[options.env].dest;
 /**
  * Clean up Task: delete everything in the dest folders
  */
-gulp.task('clean', function (cb) {
+gulp.task('clean-development', function (cb) {
 	return del([
 		// here we use a globbing pattern to match everything inside the `mobile` folder
-		options.dirs.dest.base + '/**/*'
+		options.dirs.del.development + '/**/*'
 	], {force: true});
 });
 
+gulp.task('clean-production', function (cb) {
+	return del([
+		// here we use a globbing pattern to match everything inside the `mobile` folder
+		options.dirs.del.production + '/**/*'
+	], {force: true});
+});
 
 
 
@@ -67,6 +73,9 @@ gulp.task('css', getTask('css'));
 
 /** JS */
 gulp.task('js', getTask('js'));
+
+/** RequireJS */
+gulp.task('requirejs', getTask('requirejs'));
 
 /** Images */
 gulp.task('img-dev', getTask('img-dev'));
@@ -100,7 +109,7 @@ gulp.task('images', function () {
  */
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 	gulp.watch(options.dirs.src.src_scss + '/**/*.scss', ['css']);
-	gulp.watch(options.dirs.src.src_js + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.src_js + '/**/*.js', ['js', 'requirejs']);
 	gulp.watch(options.dirs.src.src_js_additional + '/**/*.js', ['js']);
 	gulp.watch(options.dirs.src.src_js_enhance + '/**/*.js', ['js']);
 	gulp.watch(options.dirs.patternlab.files, ['pl-watch']);
@@ -112,7 +121,7 @@ gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 /**
  * Init (no minifying / file optimization) - Commit to Patternlab Repository
  */
-gulp.task('init', ['clean'], function () {
+gulp.task('init', ['clean-development'], function () {
 	// set environment variable by hand
 	options.env = 'development';
 
@@ -122,6 +131,7 @@ gulp.task('init', ['clean'], function () {
 		'img-edit',
 		'css',
 		'js',
+		'requirejs',
 		'fonts'
 	);
 
@@ -140,7 +150,7 @@ gulp.task('init', ['clean'], function () {
 /**
  * Deploy production ready for CMS Integration - Commit to CMS Repository
  */
-gulp.task('deploy', ['clean'], function () {
+gulp.task('deploy', ['clean-production'], function () {
 	// set environment variable by hand
 	options.env = 'production';
 	// set dir.dest to production
@@ -153,6 +163,7 @@ gulp.task('deploy', ['clean'], function () {
 		'img-edit',
 		'css',
 		'js',
+		'requirejs',
 		'fonts'
 	);
 
