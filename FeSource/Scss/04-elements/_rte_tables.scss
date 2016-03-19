@@ -3,12 +3,12 @@
 \*------------------------------------*/
 
 table {
-	width: 100%;
+    width: 100%;
 
-	th,
-	td {
-		text-align: left;
-	}
+    th,
+    td {
+        text-align: left;
+    }
 }
 
 /**
@@ -16,22 +16,22 @@ table {
  */
 table.table--bordered {
 
-	th,
-	td {
-		border: 1px solid $c-table-border;
+    th,
+    td {
+        border: 1px solid $c-table-border;
 
-		&:empty {
-			border: none;
-		}
-	}
+        &:empty {
+            border: none;
+        }
+    }
 
-	thead tr:last-child th {
-		border-bottom-width: 2px;
-	}
+    thead tr:last-child th {
+        border-bottom-width: 2px;
+    }
 
-	tbody tr th:last-of-type {
-		border-right-width: 2px;
-	}
+    tbody tr th:last-of-type {
+        border-right-width: 2px;
+    }
 }
 
 /**
@@ -39,17 +39,17 @@ table.table--bordered {
  */
 table.table--striped {
 
-	th {
-		background: $c-table-head-bg;
-		color: $c-table-head;
-		font-weight: bold;
-	}
+    th {
+        background: $c-table-head-bg;
+        color: $c-table-head;
+        font-weight: bold;
+    }
 
-	tbody tr:nth-of-type(odd) {
-		background-color: $c-table-odd-bg; /* Override this color in your theme stylesheet */
-	}
+    tbody tr:nth-of-type(odd) {
+        background-color: $c-table-odd-bg; /* Override this color in your theme stylesheet */
+    }
 
-	tbody tr:nth-of-type(even) {
-		background-color: $c-table-even-bg; /* Override this color in your theme stylesheet */
-	}
+    tbody tr:nth-of-type(even) {
+        background-color: $c-table-even-bg; /* Override this color in your theme stylesheet */
+    }
 }
