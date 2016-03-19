@@ -108,10 +108,10 @@ gulp.task('images', function () {
  * Watch
  */
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
-	gulp.watch(options.dirs.src.src_scss + '/**/*.scss', ['css']);
-	gulp.watch(options.dirs.src.src_js + '/**/*.js', ['js', 'requirejs']);
-	gulp.watch(options.dirs.src.src_js_additional + '/**/*.js', ['js']);
-	gulp.watch(options.dirs.src.src_js_enhance + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.scss + '/**/*.scss', ['css']);
+	gulp.watch(options.dirs.src.js + '/**/*.js', ['js', 'requirejs']);
+	gulp.watch(options.dirs.src.js_additional + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.js_enhance + '/**/*.js', ['js']);
 	gulp.watch(options.dirs.patternlab.files, ['pl-watch']);
 });
 
