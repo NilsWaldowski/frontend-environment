@@ -3,14 +3,15 @@
  * ==========================================================================
  *	Recommended use:
  *
- *	<a class="button [button--modifier]" role="button" href="[url]">Button text</a>
- *	<button class="button [button--modifier]" type="submit">Button text</button>
- *	<input class="button [button--modifier]" type="submit" value="Button text">
+ *	<a class='button [button--modifier]' role='button' href='[url]'>Button text</a>
+ *	<button class='button [button--modifier]' type='submit'>Button text</button>
+ *	<input class='button [button--modifier]' type='submit' value='Button text'>
  */
 
-.btn, button {
+.btn,
+button {
     line-height: 1;
-    padding: 0.6em 1em;
+    padding: .6em 1em;
 
     display: inline-block;
     border: 2px solid $c-btn-bg-default;
@@ -54,27 +55,4 @@
             color: #fff;
         }
     }
-}
-
-/**
- * Button Sizes
- * --------------------------------------------------------------------------
- */
-.btn--small {
-}
-
-.btn--large {
-}
-
-.btn--fluid {
-}
-
-/**
- * Button Functions
- * --------------------------------------------------------------------------
- */
-.btn--success {
-}
-
-.btn--error {
 }

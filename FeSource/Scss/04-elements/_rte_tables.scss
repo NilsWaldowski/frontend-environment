@@ -14,14 +14,14 @@ table {
 /**
  * Bordered tables (no bg-colors)
  */
-table.table--bordered {
+.table--bordered {
 
     th,
     td {
         border: 1px solid $c-table-border;
 
         &:empty {
-            border: none;
+            border: 0;
         }
     }
 
@@ -37,7 +37,7 @@ table.table--bordered {
 /**
  * Striped tables (colors)
  */
-table.table--striped {
+.table--striped {
 
     th {
         background: $c-table-head-bg;

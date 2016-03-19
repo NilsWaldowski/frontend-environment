@@ -40,7 +40,8 @@ body {
     }
 }
 
-img, iframe {
+img,
+iframe {
     max-width: 100%;
     height: auto;
 }
@@ -50,10 +51,10 @@ object {
 }
 
 .g-container {
+    @include clearfix;
     max-width: $bp-max-width;
     width: $bp-full-width;
     margin: 0 auto;
-    @include clearfix;
 }
 
 // SVG responsive handling --> http://demosthenes.info/blog/744/Make-SVG-Responsive

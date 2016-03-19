@@ -10,8 +10,12 @@
     /**
      * Base elements
      */
-    ul, ol, dl,
-    blockquote, p, address,
+    ul,
+    ol,
+    dl,
+    blockquote,
+    p,
+    address,
     table,
     fieldset,
     figure,
@@ -24,22 +28,30 @@
         margin-bottom: em($space-label);
     }
 
-    input, textarea {
+    input,
+    textarea {
         margin-bottom: em($space-input);
     }
 
-    ul ul, ol ol, dl dl {
+    ul ul,
+    ol ol,
+    dl dl {
         margin-bottom: 0;
     }
 
-    .b-content-item, .csc-default, .csc-frame {
+    .b-content-item,
+    .csc-default,
+    .csc-frame {
         margin-bottom: $space-module + px;
     }
 
     /**
      * border content elements
      */
-    hr, .rule, .csc-frame-rulerAfter, .csc-frame-rulerBefore {
+    hr,
+    .rule,
+    .csc-frame-rulerAfter,
+    .csc-frame-rulerBefore {
         margin: 0;
     }
 

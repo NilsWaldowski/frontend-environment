@@ -1,6 +1,6 @@
 /**
  * When inside (context) selector
- * usage: "@include when-inside(".myOuterClass") {color: red}"
+ * usage: '@include when-inside('.myOuterClass') {color: red}'
  * --------------------------------------------------------------------------
  */
 @mixin when-inside($context) {
@@ -10,14 +10,14 @@
 }
 
 @mixin enhanced {
-    #{".enhanced"} & {
+    #{'.enhanced'} & {
         @content;
     }
 }
 
 /**
  * Hide content off-screen without resorting to `display:none;`, also provide
- * usage: "@include accessibility;"
+ * usage: '@include accessibility;'
  * --------------------------------------------------------------------------
  */
 @mixin accessibility {
@@ -32,8 +32,8 @@
 }
 
 /**
- * PxToRm (px value but without the "px")
- * usage: "@include px-rem(font-size, 18);"
+ * PxToRm (px value but without the 'px')
+ * usage: '@include px-rem(font-size, 18);'
  * --------------------------------------------------------------------------
  */
 @function strip-unit($num) {
@@ -67,13 +67,14 @@
 
 /**
  * Headings
- * usage: "@include headings(1, 6) {...}"
+ * usage: '@include headings(1, 6) {...}'
  * --------------------------------------------------------------------------
  */
 @mixin headings($from: 1, $to: 6) {
     %base-heading {
         @content
     }
+
     @if $from >= 1 and $to <= 6 {
         @for $i from $from through $to {
             h#{$i} {
@@ -94,15 +95,16 @@
 
 /**
  * Clearfix
- * usage: "@include clearfix;"
+ * usage: '@include clearfix;'
  * --------------------------------------------------------------------------
  */
 @mixin clearfix {
     &:before,
     &:after {
-        content: "";
+        content: '';
         display: table;
     }
+
     &:after {
         clear: both;
     }
@@ -110,7 +112,7 @@
 
 /**
  * Text Overflow / Truncate
- * usage: "@include text-truncate;"
+ * usage: '@include text-truncate;'
  * --------------------------------------------------------------------------
  */
 @mixin text-truncate {
@@ -125,12 +127,14 @@
  */
 @mixin aspect-ratio($width, $height) {
     position: relative;
+
     &:before {
         display: block;
-        content: "";
+        content: '';
         width: 100%;
         padding-top: ($height / $width) * 100%;
     }
+
     > .aspect-ratio__inner {
         position: absolute;
         top: 0;
@@ -142,7 +146,7 @@
 
 /**
  * Breakpoints
- * usage: "@include bp(small) {...}"
+ * usage: '@include bp(small) {...}'
  * --------------------------------------------------------------------------
  */
 @mixin bp($media-query) {
@@ -209,7 +213,7 @@
 // String Replace
 // =============================================================================
 
-@function str-replace($string, $search, $replace: "") {
+@function str-replace($string, $search, $replace: '') {
     $index: str-index($string, $search);
 
     @if $index {
@@ -226,19 +230,19 @@
     $src: null;
 
     $extmods: (
-        eot: "?",
-        svg: "#" + str-replace($name, " ", "_")
+        eot: '?',
+        svg: '#' + str-replace($name, ' ', '_')
     );
 
     $formats: (
-        otf: "opentype",
-        ttf: "truetype"
+        otf: 'opentype',
+        ttf: 'truetype'
     );
 
     @each $ext in $exts {
         $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
         $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
-        $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+        $src: append($src, url(quote($path + '.' + $extmod)) format(quote($format)), comma);
     }
 
     @font-face {

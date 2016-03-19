@@ -1,18 +1,23 @@
-ul.rte_ul, ol.rte_ol {
+.rte_ul,
+%rte_ul
+.rte_ol,
+%rte_ol {
     margin-left: 25px;
     list-style: disc;
 
     li {
-        margin: 5px 0 5px 0;
+        margin: 5px 0;
     }
 
-    ul, ol {
+    ul,
+    ol {
         margin-left: 25px;
         list-style: disc;
     }
 }
 
-ol.rte_ol {
+.rte_ol,
+%rte_ol {
     list-style: decimal;
 
     ol {
@@ -24,11 +29,11 @@ ol.rte_ol {
 .htmlarea-content-body {
 
     ul {
-        @extend .rte_ul;
+        @extend %rte_ul;
     }
 
     ol {
-        @extend .rte_ol;
+        @extend %rte_ol;
     }
 
 }

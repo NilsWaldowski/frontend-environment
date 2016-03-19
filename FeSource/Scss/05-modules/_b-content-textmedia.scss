@@ -51,7 +51,7 @@ $textmedia-breakpoint-beside: $bp-medium-small;
     @include bp($textmedia-breakpoint-beside) {
 
         /**
-        * image / text "GRID"
+        * image / text 'GRID'
         */
         .b-content-textmedia__images {
             max-width: calc(50% + #{$textmedia-space-between / 2});
