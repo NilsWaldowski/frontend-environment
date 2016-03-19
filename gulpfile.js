@@ -12,7 +12,8 @@ var notifier = require('node-notifier'),
 			'gulp-merge-media-queries': 'cmq',
 			'gulp-minify-css': 'minifycss',
 			'gulp-if': 'gulpif',
-			'imagemin-pngquant': 'pngquant'
+			'imagemin-pngquant': 'pngquant',
+			'gulp-scss-lint': 'scsslint'
 		}
 	}),
 	knownOptions = {

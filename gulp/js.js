@@ -1,4 +1,3 @@
-
 module.exports = function (gulp, plugins, options) {
 	return function () {
 
@@ -7,6 +6,15 @@ module.exports = function (gulp, plugins, options) {
 			options.dirs.src.js + '/**/*.js',
 			options.dirs.src.js_additional  + '/**/*.js'
 		])
+
+			// use jshint
+			.pipe(plugins.jshint())
+
+			// use jslint
+			.pipe(plugins.jscs())
+
+			// fail if error found
+			.pipe(plugins.jscs.reporter('fail'))
 
 			// concatenate js files
 			.pipe(plugins.concat('javascript.js'))

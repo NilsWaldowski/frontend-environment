@@ -1,7 +1,9 @@
-
 module.exports = function (gulp, plugins, options) {
 	return function () {
 		gulp.src(options.dirs.src.scss + '/**/*.scss')
+
+			// lint
+			.pipe(plugins.scsslint())
 
 			// compile scss files
 			.pipe(plugins.sass({
