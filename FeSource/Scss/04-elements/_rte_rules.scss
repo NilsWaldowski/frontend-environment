@@ -2,17 +2,9 @@
 	$RULES
 \*------------------------------------*/
 .rule,
-hr,
-.csc-frame-rulerAfter {
+hr {
     border: 0;
     border-bottom: 1px solid $c-rules-border;
-    margin-left: auto; //centers it in case a modifier reduces the width of the rule/hr
-    margin-right: auto; //centers it in case a modifier reduces the width of the rule/hr
-}
-
-.csc-frame-rulerBefore {
-    border: 0;
-    border-top: 1px solid $c-rules-border;
     margin-left: auto; //centers it in case a modifier reduces the width of the rule/hr
     margin-right: auto; //centers it in case a modifier reduces the width of the rule/hr
 }

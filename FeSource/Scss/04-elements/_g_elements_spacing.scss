@@ -39,9 +39,7 @@
         margin-bottom: 0;
     }
 
-    .b-content-item,
-    .csc-default,
-    .csc-frame {
+    .b-content-item {
         margin-bottom: $space-module + px;
     }
 
@@ -49,20 +47,8 @@
      * border content elements
      */
     hr,
-    .rule,
-    .csc-frame-rulerAfter,
-    .csc-frame-rulerBefore {
+    .rule {
         margin: 0;
-    }
-
-    .csc-frame-rulerAfter {
-        margin-bottom: $space-module-half + px;
-        padding-bottom: $space-module-half + px;
-    }
-
-    .csc-frame-rulerBefore {
-        margin-top: $space-module-half + px;
-        padding-top: $space-module-half + px;
     }
 
     hr {

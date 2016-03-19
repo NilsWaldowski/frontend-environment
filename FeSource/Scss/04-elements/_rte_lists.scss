@@ -1,7 +1,7 @@
-.rte_ul,
-%rte_ul
-.rte_ol,
-%rte_ol {
+.rte__ul,
+%rte__ul
+.rte__ol,
+%rte__ol {
     margin-left: 25px;
     list-style: disc;
 
@@ -16,8 +16,8 @@
     }
 }
 
-.rte_ol,
-%rte_ol {
+.rte__ol,
+%rte__ol {
     list-style: decimal;
 
     ol {
@@ -29,11 +29,10 @@
 .htmlarea-content-body {
 
     ul {
-        @extend %rte_ul;
+        @extend %rte__ul;
     }
 
     ol {
-        @extend %rte_ol;
+        @extend %rte__ol;
     }
-
 }
