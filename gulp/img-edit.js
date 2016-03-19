@@ -1,9 +1,23 @@
-var dirs = require('./config/dirs.json');
 
-module.exports = function (gulp, plugins) {
+module.exports = function (gulp, plugins, options) {
 	return function () {
-		gulp.src(dirs.src.src_img_edit + '/**/*')
+		gulp.src(options.dirs.src.img_edit + '/**/*')
 
-			.pipe(gulp.dest(dirs.pl_dest.pl_public_images_edit));
+			// only on production minify that shit
+			.pipe(plugins.gulpif(
+					options.env === 'production',
+					plugins.imagemin({
+						optimizationLevel: 3,
+						interlaced: true,
+						progressive: true,
+						use: [plugins.pngquant({
+							quality: '80-85',
+							speed: 6
+						})]
+					})
+				)
+			)
+
+			.pipe(gulp.dest(options.dirs.dest.images_edit));
 	};
 };

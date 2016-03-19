@@ -1,6 +1,5 @@
-var dirs = require('./config/dirs.json');
 
-module.exports = function (gulp, plugins) {
+module.exports = function (gulp, plugins, options) {
 	return function () {
 		gulp.src('', {read: false})
 

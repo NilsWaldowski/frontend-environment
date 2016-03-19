@@ -1,9 +1,8 @@
-var dirs = require('./config/dirs.json');
 
-module.exports = function (gulp, plugins) {
+module.exports = function (gulp, plugins, options) {
 	return function () {
-		gulp.src(dirs.src.src_fonts + '/**/*')
+		gulp.src(options.dirs.src.fonts + '/**/*')
 
-			.pipe(gulp.dest(dirs.pl_dest.pl_public_fonts));
+			.pipe(gulp.dest(options.dirs.dest.fonts));
 	};
 };

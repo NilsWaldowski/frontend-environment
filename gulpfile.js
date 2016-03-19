@@ -3,6 +3,7 @@
  */
 var notifier = require('node-notifier'),
 	gulp = require('gulp'),
+	minimist = require('minimist'),
 	del = require('del'),
 	fs = require('fs'),
 	plugins = require('gulp-load-plugins')({
@@ -10,36 +11,32 @@ var notifier = require('node-notifier'),
 		rename: {
 			'gulp-merge-media-queries': 'cmq',
 			'gulp-minify-css': 'minifycss',
+			'gulp-if': 'gulpif',
 			'imagemin-pngquant': 'pngquant'
 		}
-	});
-
-
-
+	}),
+	knownOptions = {
+		string: 'env',
+		default: { env: process.env.NODE_ENV || 'development' }
+	},
+	options = minimist(process.argv.slice(2), knownOptions);
 
 /**
  * Load Json files with directories
  */
-var dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
-
+options.dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
+// set dest to environment (production or development) to get the specific path settings
+options.dirs.dest = options.dirs[options.env].dest;
 
 
 
 /**
  * Clean up Task: delete everything in the dest folders
  */
-gulp.task('clean-deploy', function (cb) {
+gulp.task('clean', function (cb) {
 	return del([
 		// here we use a globbing pattern to match everything inside the `mobile` folder
-		dirs.dest.dest + '/**/*',
-		dirs.dest.dest_img_edit + '/**/*'
-	], {force: true});
-});
-gulp.task('clean-pl', function (cb) {
-	return del([
-		// here we use a globbing pattern to match everything inside the `mobile` folder
-		dirs.pl_dest.pl_public + '/**/*',
-		dirs.pl_dest.pl_public_images_edit + '/**/*'
+		options.dirs.dest.base + '/**/*'
 	], {force: true});
 });
 
@@ -51,7 +48,7 @@ gulp.task('clean-pl', function (cb) {
  * http://macr.ae/article/splitting-gulpfile-multiple-files.html
  */
 function getTask(task) {
-	return require('./gulp/' + task)(gulp, plugins);
+	return require('./gulp/' + task)(gulp, plugins, options);
 }
 
 
@@ -66,31 +63,21 @@ gulp.task('pl-generate', getTask('pl-generate'));
 
 /** CSS */
 gulp.task('css', getTask('css'));
-gulp.task('css-deploy', getTask('css-deploy'));
 
 /** JS */
 gulp.task('js', getTask('js'));
-gulp.task('js-deploy', getTask('js-deploy'));
 
 /** Images */
 gulp.task('img-dev', getTask('img-dev'));
-gulp.task('img-dev-deploy', getTask('img-dev-deploy'));
 gulp.task('img-edit', getTask('img-edit'));
-gulp.task('img-edit-deploy', getTask('img-edit-deploy'));
 
 /** SVG Icons */
 gulp.task('svg', getTask('svg'));
-gulp.task('svg-deploy', getTask('svg-deploy'));
 gulp.task('png', getTask('png'));
-gulp.task('png-deploy', getTask('png-deploy'));
 gulp.task('icons', ['svg', 'png']);
-gulp.task('icons-deploy', ['svg-deploy', 'png-deploy']);
 
 /** Fonts */
 gulp.task('fonts', getTask('fonts'));
-gulp.task('fonts-deploy', getTask('fonts-deploy'));
-
-
 
 
 /**
@@ -111,11 +98,11 @@ gulp.task('images', function () {
  * Watch
  */
 gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
-	gulp.watch(dirs.src.src_scss + '/**/*.scss', ['css']);
-	gulp.watch(dirs.src.src_js + '/**/*.js', ['js']);
-	gulp.watch(dirs.src.src_js_additional + '/**/*.js', ['js']);
-	gulp.watch(dirs.src.src_js_enhance + '/**/*.js', ['js']);
-	gulp.watch(dirs.patternlab.files, ['pl-watch']);
+	gulp.watch(options.dirs.src.src_scss + '/**/*.scss', ['css']);
+	gulp.watch(options.dirs.src.src_js + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.src_js_additional + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.src.src_js_enhance + '/**/*.js', ['js']);
+	gulp.watch(options.dirs.patternlab.files, ['pl-watch']);
 });
 
 
@@ -124,7 +111,9 @@ gulp.task('watch', ['css', 'js', 'pl-watch'], function () {
 /**
  * Init (no minifying / file optimization) - Commit to Patternlab Repository
  */
-gulp.task('init', ['clean-pl'], function () {
+gulp.task('init', ['clean'], function () {
+	// set environment variable by hand
+	options.env = 'development';
 
 	gulp.start(
 		'icons',
@@ -150,15 +139,20 @@ gulp.task('init', ['clean-pl'], function () {
 /**
  * Deploy production ready for CMS Integration - Commit to CMS Repository
  */
-gulp.task('deploy', ['clean-deploy'], function () {
+gulp.task('deploy', ['clean'], function () {
+	// set environment variable by hand
+	options.env = 'production';
+	// set dir.dest to production
+	// @see above where config is included
+	options.dirs.dest = options.dirs[options.env].dest;
 
 	gulp.start(
-		'icons-deploy',
-		'img-dev-deploy',
-		'img-edit-deploy',
-		'css-deploy',
-		'js-deploy',
-		'fonts-deploy'
+		'icons',
+		'img-dev',
+		'img-edit',
+		'css',
+		'js',
+		'fonts'
 	);
 
 	notifier.notify({

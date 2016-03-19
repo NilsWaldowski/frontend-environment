@@ -1,12 +1,11 @@
-var dirs = require('./config/dirs.json');
 
-module.exports = function (gulp, plugins) {
+module.exports = function (gulp, plugins, options) {
 	return function () {
 		plugins.browserSync({
 			server: {
-				baseDir: dirs.patternlab.public
+				baseDir: options.dirs.patternlab.public
 			},
-			files: dirs.patternlab.public,
+			files: options.dirs.patternlab.public,
 			ghostMode: true,
 			open: "external"
 		});
