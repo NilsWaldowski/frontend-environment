@@ -21,6 +21,7 @@ module.exports = function (gulp, plugins, options) {
 			// optimize css files
 			.pipe(plugins.cmq({log: false}))
 
+			// todo: if contition doesn't work properly
 			// only on production
 			.pipe(plugins.gulpif(
 				options.env === 'production',
