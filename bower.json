@@ -1,13 +1,13 @@
 {
-  "name": "frontend-environment",
-  "version": "0.0.1",
-  "dependencies": {
-    "almond": "~0.3",
-    "modernizr": "~2.6",
-    "jquery": "~2.2",
-    "magnific-popup": "~1.1",
-    "html5shiv": "~3.7",
-    "fastclick": "~1.0",
-    "requirejs": "~2.1"
-  }
+    "name": "frontend-environment",
+    "version": "0.0.1",
+    "dependencies": {
+        "almond": "~0.3",
+        "modernizr": "~2.6",
+        "jquery": "~2.2",
+        "magnific-popup": "~1.1",
+        "html5shiv": "~3.7",
+        "fastclick": "~1.0",
+        "requirejs": "~2.1"
+    }
 }
