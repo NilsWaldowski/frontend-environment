@@ -8,10 +8,18 @@ module.exports = function (gulp, plugins, options) {
 			.pipe(plugins.jshint())
 
 			// use jslint
-			//.pipe(plugins.jscs())
+			.pipe(plugins.jscs())
 
-			// fail if error found
-			.pipe(plugins.jscs.reporter('fail'))
+			.pipe(plugins.jscs.reporter())
+
+			/*
+			.pipe(plugins.gulpif(
+					options.env === 'production',
+					// fail if error found
+					plugins.jscs.reporter('fail')
+				)
+			)
+			*/
 
 			.pipe(gulp.dest(options.dirs.dest.js));
 
