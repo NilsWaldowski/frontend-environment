@@ -3,7 +3,7 @@
  */
 define([
         'jquery',
-        'Modules/popup'
+        'Modules/popup',
         'svg4everybody'
     ],
     function($,

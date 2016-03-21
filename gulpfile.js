@@ -70,6 +70,9 @@ gulp.task('js', getTask('js'));
 /** RequireJS */
 gulp.task('requirejs', getTask('requirejs'));
 
+/** Modernizr */
+gulp.task('modernizr', getTask('modernizr'));
+
 /** Images */
 gulp.task('img-dev', getTask('img-dev'));
 gulp.task('img-edit', getTask('img-edit'));
@@ -97,7 +100,7 @@ gulp.task('images', function() {
 /**
  * Watch
  */
-gulp.task('watch', ['css', 'js', 'pl-watch'], function() {
+gulp.task('watch', 'default' ['css', 'js', 'pl-watch'], function() {
     gulp.watch(options.dirs.src.scss + '/**/*.scss', ['css']);
     gulp.watch(options.dirs.src.js + '/**/*.js', ['js', 'requirejs']);
     gulp.watch(options.dirs.src.js_additional + '/**/*.js', ['js']);
@@ -108,7 +111,7 @@ gulp.task('watch', ['css', 'js', 'pl-watch'], function() {
 /**
  * Init (no minifying / file optimization) - Commit to Patternlab Repository
  */
-gulp.task('init', ['clean-development'], function() {
+gulp.task('init', ['clean-development', 'modernizr'], function() {
     // set environment variable by hand
     options.env = 'development';
 
@@ -118,8 +121,8 @@ gulp.task('init', ['clean-development'], function() {
         'img-edit',
         'css',
         'js',
-        'requirejs',
-        'fonts'
+        'fonts',
+        'requirejs'
     );
 
     notifier.notify({
@@ -135,7 +138,7 @@ gulp.task('init', ['clean-development'], function() {
 /**
  * Deploy production ready for CMS Integration - Commit to CMS Repository
  */
-gulp.task('deploy', ['clean-production'], function() {
+gulp.task('deploy', ['clean-production', 'modernizr'], function() {
     // set environment variable by hand
     options.env = 'production';
     // set dir.dest to production

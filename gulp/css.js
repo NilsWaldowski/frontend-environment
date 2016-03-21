@@ -16,12 +16,20 @@ module.exports = function(gulp, plugins, options) {
                 this.emit('end');
             })
 
-            .pipe(plugins.autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+            .pipe(plugins.autoprefixer(
+                '> 1% in DE',
+                'Android >= 4.1',
+                'Explorer >= 8',
+                'Firefox >= 17',
+                'iOS >= 6',
+                'last 4 versions',
+                'Opera >= 12.1',
+                'Safari >= 7'))
 
             // optimize css files
             .pipe(plugins.cmq({log: false}))
 
-            // todo: if contition doesn't work properly
+            // todo: if condition doesn't work properly
             // only on production
             .pipe(plugins.gulpif(
                     options.env === 'production',

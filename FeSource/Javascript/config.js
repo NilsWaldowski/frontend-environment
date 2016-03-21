@@ -5,6 +5,7 @@ require.config({
     baseUrl: '/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/',
     paths: {
         'jquery': '../Vendor/jquery/dist/jquery',
+        'modernizr': 'Build/modernizr.custom',
         'svg4everybody': '../Vendor/svg4everybody/dist/svg4everybody',
         'magnific-popup.core': '../Vendor/magnific-popup/src/js/core',
         'magnific-popup.inline': '../Vendor/magnific-popup/src/js/inline',
@@ -12,6 +13,7 @@ require.config({
         'magnific-popup.image': '../Vendor/magnific-popup/src/js/image'
     },
     'deps': [
+        'modernizr',
         'main'
     ]
 });

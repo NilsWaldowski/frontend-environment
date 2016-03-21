@@ -36,6 +36,7 @@
 		"js_additional": "./FeSource/JavascriptAdditional",
 		"js_enhance": "./FeSource/JavascriptEnhancement",
 		"js_modules": "./FeSource/Javascript/modules",
+		"js_build": "./FeSource/Javascript/Build",
 		"js_vendor": "./FeSource/Vendor",
 		"scss": "./FeSource/Scss",
 		"fonts": "./FeSource/Fonts"

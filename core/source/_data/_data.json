@@ -4,12 +4,14 @@
 		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css/screen.css"
 	},
 	"js": {
-		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Vendor/requirejs/require.js",
-		"src_config": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/config",
-		"src_live": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/Build/javascript.js"
+		"require": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Vendor/requirejs/require.js",
+		"require_config": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/config",
+		"compiled_production": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/Build/javascript.js",
+		"enhancement": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement/progressive.enhancement.js",
+		"html5shiv": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement/html5shiv.js"
 	},
-	"js_html5shiv": {
-		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement/html5shiv.js"
+	"fonts": {
+		"src": "http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister"
 	},
 	"bodyClass": "bodyClass",
 	"img": {

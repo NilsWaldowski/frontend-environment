@@ -44,3 +44,11 @@ use following commands in a third terminal window:
 
 7.) "gulp deploy"
 	If you wish to deploy your changes in prototype to sitepackage extension use this command.
+
+
+TODO: development/production handling
+Windows:    SET NODE_ENV=development
+OSX/Linux:  export NODE_ENV=development
+
+gulp task --env development
+gulp task --env production
