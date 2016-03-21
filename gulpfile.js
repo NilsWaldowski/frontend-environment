@@ -75,9 +75,10 @@ gulp.task('img-dev', getTask('img-dev'));
 gulp.task('img-edit', getTask('img-edit'));
 
 /** SVG Icons */
-gulp.task('svg', getTask('svg'));
-gulp.task('png', getTask('png'));
-gulp.task('icons', ['svg', 'png']);
+gulp.task('svg-min', getTask('svg-min'));
+gulp.task('svg-png', getTask('svg-png'));
+gulp.task('svg-sprite', getTask('svg-sprite'));
+gulp.task('icons', ['svg-min', 'svg-png', 'svg-sprite']);
 
 /** Fonts */
 gulp.task('fonts', getTask('fonts'));

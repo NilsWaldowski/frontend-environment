@@ -4,6 +4,7 @@
 define([
         'jquery',
         'Modules/popup'
+        'svg4everybody'
     ],
     function($,
         popup) {

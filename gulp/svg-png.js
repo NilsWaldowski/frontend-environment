@@ -3,6 +3,7 @@ module.exports = function(gulp, plugins, options) {
         gulp.src(options.dirs.src.icons + '/**/*.svg')
 
             .pipe(plugins.svg2png())
+
             .pipe(gulp.dest(options.dirs.dest.icons));
     };
 };
