@@ -13,7 +13,8 @@ var notifier = require('node-notifier'),
             'gulp-minify-css': 'minifycss',
             'gulp-if': 'gulpif',
             'imagemin-pngquant': 'pngquant',
-            'gulp-scss-lint': 'scsslint'
+            'gulp-scss-lint': 'scsslint',
+            'postcss-image-inliner': 'imageinliner'
         }
     }),
     knownOptions = {

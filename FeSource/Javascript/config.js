@@ -10,7 +10,8 @@ require.config({
         'magnific-popup.core': '../Vendor/magnific-popup/src/js/core',
         'magnific-popup.inline': '../Vendor/magnific-popup/src/js/inline',
         'magnific-popup.gallery': '../Vendor/magnific-popup/src/js/gallery',
-        'magnific-popup.image': '../Vendor/magnific-popup/src/js/image'
+        'magnific-popup.image': '../Vendor/magnific-popup/src/js/image',
+        'baseline': '../Vendor/baseline/baseline'
     },
     'deps': [
         'modernizr',

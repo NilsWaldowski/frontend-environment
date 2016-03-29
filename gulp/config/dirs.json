@@ -16,6 +16,7 @@
 	},
 	"development": {
 		"dest": {
+			"baseUrl": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
 			"base": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
 			"css": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css",
 			"icons": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons",
