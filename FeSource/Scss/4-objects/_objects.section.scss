@@ -1,0 +1,43 @@
+.#{$fk-prefix}section,
+%#{$fk-prefix}section {
+    position: relative;
+}
+
+.#{$fk-prefix}section__wrapper,
+%#{$fk-prefix}section__wrapper {
+    margin: 0 auto;
+    max-width: 1190px;
+    padding: 0 20px;
+
+    @include bp(small) {
+        font-family: 'small';
+
+        h1 {
+            color: green;
+        }
+    }
+
+    @include bp(medium-small) {
+        font-family: 'medium-small';
+
+        h1 {
+            color: blue;
+        }
+    }
+
+    @include bp(medium) {
+        font-family: 'medium';
+
+        h1 {
+            color: red;
+        }
+    }
+
+    @include bp(large) {
+        font-family: 'large';
+
+        h1 {
+            color: white;
+        }
+    }
+}

@@ -1,0 +1,4 @@
+.#{$fk-prefix}clearfix,
+%#{$fk-prefix}clearfix {
+    @include clearfix;
+}
