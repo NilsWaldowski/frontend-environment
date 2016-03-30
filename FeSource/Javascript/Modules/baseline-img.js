@@ -11,12 +11,24 @@ define([
          */
         init: function() {
             console.log('test');
-            $('img').baseline();
+            //$('img').baseline();
+
+            /**
+             * Solution I:  keeping basegrid for figcaption and gain unwanted spaces vs.
+             * Solution II: keep baseline outside of image/caption container
+             */
+
             /*
-            $('img').baseline(function() {
+            // Solution I
+            $('.b-content-textmedia__images img').baseline(function() {
                 return parseFloat(getComputedStyle(document.documentElement, null).getPropertyValue('font-size'));
             });
             */
+
+            // Solution II
+            $('.b-content-textmedia__images').baseline(function() {
+                return parseFloat(getComputedStyle(document.documentElement, null).getPropertyValue('font-size'));
+            });
         }
     };
 

@@ -7,10 +7,10 @@
 // Change names if you prefer, it wont break the mixin as long as they are strings not just numbers.
 $breakpoints: (
     break-0: 0,     // 0px       Mobile first
-    break-1: 640,   // 640px   ~ Small tablet up
-    break-2: 800,   // 800px   ~ Large tablet up
+    break-1: 570,   // 570px   ~ Small tablet up
+    break-2: 768,   // 768px   ~ Large tablet up
     break-3: 1024,  // 1024px  ~ Desktop up
-    break-4: 1600   // 1600px  ~ Large desktop up
+    break-4: 1280   // 1280px  ~ Large desktop up
 ) !default;
 
 // Root font-sizes for each breakpoint. Set to half desired line-height of body text.
@@ -21,35 +21,6 @@ $rootsizes: (
     rootsize-2: 15,   // 30px line-height body text
     rootsize-3: 17,   // 34px line-height body text
     rootsize-4: 19    // 38px line-height body text
-) !default;
-
-// Set the optimum line-length for your text (based on typeface).
-// Aim for 75–100 characters a line when possible, at smaller sizes type size is more important.
-// ! Make sure to have as many widths as breakpoints above.
-// Note: this was 'maxwidths' in previous versions.
-$measures: (
-    measure-0: 500,  // 500px wide
-    measure-1: 550,  // 550px wide
-    measure-2: 600,  // 600px wide
-    measure-3: 680,  // 680px wide
-    measure-4: 750   // 750px wide
-) !default;
-
-// Set the max-widths for containers (based on design).
-// ! Make sure to have as many widths as breakpoints above.
-$maxwidths: (
-    width-0: 500,  // 500px wide
-    width-1: 600,  // 600px wide
-    width-2: 800,  // 800px wide
-    width-3: 1100, // 110px wide
-    width-4: 1300  // 1300px wide
-) !default;
-
-// Gutter widths
-$gutterwidths: (
-    small: 1rem,
-    medium: 2rem,
-    large: 4rem
 ) !default;
 
 // Add typefaces here.
@@ -82,3 +53,33 @@ $monospacetype: (
 
 // Selection of Typekit fonts cap-height sizes:
 // Proxima Nova: .57, Museo Slab: .66, JAF Facit: .7, Brandon Grotesque: .65, Clavo: .7, Adelle: .66, FF Tisa Pro: .82, Jubilat: .66, Futura PT: .66, Chaparral Pro: .5, Minion Pro: .66, Myriad Pro: .66, Adobe Caslon Pro: .36
+
+
+// Set the optimum line-length for your text (based on typeface).
+// Aim for 75–100 characters a line when possible, at smaller sizes type size is more important.
+// ! Make sure to have as many widths as breakpoints above.
+// Note: this was 'maxwidths' in previous versions.
+$measures: (
+    measure-0: 500,  // 500px wide
+    measure-1: 550,  // 550px wide
+    measure-2: 600,  // 600px wide
+    measure-3: 680,  // 680px wide
+    measure-4: 750   // 750px wide
+) !default;
+
+// Set the max-widths for containers (based on design).
+// ! Make sure to have as many widths as breakpoints above.
+$maxwidths: (
+    width-0: 500,  // 500px wide
+    width-1: 600,  // 600px wide
+    width-2: 800,  // 800px wide
+    width-3: 1100, // 110px wide
+    width-4: 1300  // 1300px wide
+) !default;
+
+// Gutter widths
+$gutterwidths: (
+    small: 1rem,
+    medium: 2rem,
+    large: 4rem
+) !default;

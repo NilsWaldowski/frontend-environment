@@ -74,19 +74,19 @@
         // Heading level 4.
         h4,
         .delta {
-            @include sassline(delta, $headingtype, 2, 0, all);
+            @include sassline(delta, $headingtype, 2, 1, all);
         }
 
         // Heading level 5.
         h5,
         .epsilon {
-            @include sassline(epsilon, $headingtype, 2, 0, all);
+            @include sassline(epsilon, $headingtype, 2, 1, all);
         }
 
         // Heading level 6.
         h6,
         .zeta {
-            @include sassline(zeta, $headingtype, 2, 0, all);
+            @include sassline(zeta, $headingtype, 2, 1, all);
         }
 
         // Lists.
@@ -239,20 +239,27 @@
 
         // Caption and inline small text.
         small,
-        .caption,
-        figcaption {
+        //figcaption,
+        time,
+        .caption {
             @include fontsize(theta, all);
             font-family: unquote(map-get($headingtype, font-family));
             font-style: normal;
             font-weight: map-get($headingtype, regular);
         }
 
-        small {
-            line-height: 1rem;
+        figcaption {
+            @include fontsize(theta, all);
+            margin-top: 5px;
+            line-height: 1.5;
+
+            // todo: if we want to archive baseline grid for images we need to get baseline with JS for images and use baseline mixin here
+            //@include baseline(theta, $headingtype, 1, 0, all);
         }
 
+        time,
         .caption {
-            @include baseline(theta, $headingtype, 2, 2, all);
+            @include baseline(theta, $headingtype, 1, 2, all);
         }
 
         // Nice spacing for captions.

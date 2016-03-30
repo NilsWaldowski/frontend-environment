@@ -1,4 +1,4 @@
-$textmedia-space-between: 20px;
+$textmedia-space-between: 2rem;
 $textmedia-breakpoint-beside: $bp-medium-small;
 
 /**
@@ -36,6 +36,12 @@ $textmedia-breakpoint-beside: $bp-medium-small;
     ul {
         overflow: hidden;
         list-style: none;
+        margin: 0 !important;
+        padding: 0 !important;
+
+        li {
+            margin: 0 !important;
+        }
     }
 
     figcaption {
@@ -103,6 +109,13 @@ $textmedia-breakpoint-beside: $bp-medium-small;
             }
         }
     }
+
+    /**
+    * space between image list (in col)
+    */
+    .b-content-textmedia__images__list__item + .b-content-textmedia__images__list__item {
+        padding-top: $textmedia-space-between;
+    }
 }
 
 /**
@@ -112,6 +125,11 @@ $textmedia-breakpoint-beside: $bp-medium-small;
 .b-content-textmedia__textpic--below {
 
     @include bp($textmedia-breakpoint-beside) {
+
+        .b-content-textmedia__images__list__item + .b-content-textmedia__images__list__item {
+            padding-top: 0;
+        }
+
         .b-content-textmedia__images__list__item {
             //width: 50%;
             float: left;
@@ -125,5 +143,12 @@ $textmedia-breakpoint-beside: $bp-medium-small;
                 padding-left: $textmedia-space-between / 2;
             }
         }
+    }
+
+    /**
+    * space between image list (in col)
+    */
+    .b-content-textmedia__images__list__item + .b-content-textmedia__images__list__item {
+        padding-top: $textmedia-space-between;
     }
 }
