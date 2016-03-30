@@ -27,7 +27,7 @@ module.exports = function(gulp, plugins, options) {
 
             // init sourcemaps
             // todo: fix sourcemaps
-            .pipe(plugins.sourcemaps.init())
+            //.pipe(plugins.sourcemaps.init())
 
             // compile scss files
             .pipe(plugins.sass({
@@ -47,7 +47,7 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.cmq({log: false}))
 
             // write sourcemaps
-            .pipe(plugins.sourcemaps.write({includeContent: false, sourceRoot: '.'}))
+            //.pipe(plugins.sourcemaps.write({includeContent: false, sourceRoot: '.'}))
 
             // todo: if condition doesn't work properly
             // only on production
