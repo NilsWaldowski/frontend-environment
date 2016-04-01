@@ -17,30 +17,30 @@
 	"development": {
 		"dest": {
 			"baseUrl": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
-			"base": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
-			"css": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css",
-			"icons": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons",
-			"images": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images",
-			"images_edit": "./public/fileadmin/PreparedImages",
-			"js": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript",
-			"js_enhance": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement",
-			"js_build": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/Build",
-			"js_vendor": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Vendor",
-			"fonts": "./public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Fonts"
+			"base": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
+			"css": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css",
+			"icons": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons",
+			"images": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images",
+			"images_edit": "public/fileadmin/PreparedImages",
+			"js": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript",
+			"js_enhance": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement",
+			"js_build": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/Build",
+			"js_vendor": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Vendor",
+			"fonts": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Fonts"
 		}
 	},
 	"src": {
-		"icons": "./FeSource/Icons",
-		"img": "./FeSource/Images",
-		"img_edit": "./FeSource/ImagesEditorial",
-		"js": "./FeSource/Javascript",
-		"js_additional": "./FeSource/JavascriptAdditional",
-		"js_enhance": "./FeSource/JavascriptEnhancement",
-		"js_modules": "./FeSource/Javascript/modules",
-		"js_build": "./FeSource/Javascript/Build",
-		"js_vendor": "./FeSource/Vendor",
-		"scss": "./FeSource/Scss",
-		"fonts": "./FeSource/Fonts"
+		"icons": "FeSource/Icons",
+		"img": "FeSource/Images",
+		"img_edit": "FeSource/ImagesEditorial",
+		"js": "FeSource/Javascript",
+		"js_additional": "FeSource/JavascriptAdditional",
+		"js_enhance": "FeSource/JavascriptEnhancement",
+		"js_modules": "FeSource/Javascript/modules",
+		"js_build": "FeSource/Javascript/Build",
+		"js_vendor": "FeSource/Vendor",
+		"scss": "FeSource/Scss",
+		"fonts": "FeSource/Fonts"
 	},
 	"del": {
 		"production": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
@@ -49,9 +49,9 @@
 	"patternlab": {
 		"public": "./public",
 		"files": [
-			"./source/_patterns/**/*.mustache",
-			"./source/_patterns/**/*.json",
-			"./source/_data/*.json"
+			"source/_patterns/**/*.mustache",
+			"source/_patterns/**/*.json",
+			"source/_data/*.json"
 		]
 	}
 }
