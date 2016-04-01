@@ -4,7 +4,7 @@
 define([
         'jquery',
         'Modules/popup',
-        'Modules/baseline-img',
+        //'Modules/baseline-img',
         'svg4everybody'
     ],
     function($,
@@ -13,7 +13,7 @@ define([
         svg4everybody) {
         'use strict';
         popup.init();
-        baseline.init();
+        //baseline.init();
         svg4everybody();
     }
 );

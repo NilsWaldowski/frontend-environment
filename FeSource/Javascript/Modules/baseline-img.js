@@ -10,9 +10,6 @@ define([
          * Initialize
          */
         init: function() {
-            console.log('test');
-            //$('img').baseline();
-
             /**
              * Solution I:  keeping basegrid for figcaption and gain unwanted spaces vs.
              * Solution II: keep baseline outside of image/caption container
