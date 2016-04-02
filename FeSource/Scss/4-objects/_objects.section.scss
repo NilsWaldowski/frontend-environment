@@ -1,10 +1,10 @@
-.#{$fk-prefix}section,
-%#{$fk-prefix}section {
+.#{$prefix}section,
+%#{$prefix}section {
     position: relative;
 }
 
-.#{$fk-prefix}section__wrapper,
-%#{$fk-prefix}section__wrapper {
+.#{$prefix}section__wrapper,
+%#{$prefix}section__wrapper {
     margin: 0 auto;
     max-width: 1190px;
     padding: 0 20px;

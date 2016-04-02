@@ -1,4 +1,4 @@
-.#{$fk-prefix}text-truncate,
-%#{$fk-prefix}text-truncate {
+.#{$prefix}text-truncate,
+%#{$prefix}text-truncate {
     @include text-truncate;
 }

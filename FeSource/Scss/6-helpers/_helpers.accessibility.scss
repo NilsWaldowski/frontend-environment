@@ -1,4 +1,4 @@
-.#{$fk-prefix}accessibility,
-%#{$fk-prefix}accessibility {
+.#{$prefix}accessibility,
+%#{$prefix}accessibility {
     @include accessibility;
 }

@@ -1,4 +1,4 @@
-.#{$fk-prefix}aspect-ratio,
-%#{$fk-prefix}aspect-ratio {
+.#{$prefix}aspect-ratio,
+%#{$prefix}aspect-ratio {
     @include aspect-ratio(16px, 9px);
 }
