@@ -1,11 +1,9 @@
-module.exports = function(gulp, plugins, options) {
+module.exports = function(gulp, plugins, options, envCondition) {
     return function() {
         gulp.src(options.dirs.src.img + '/**/*')
 
-            // only on production minify that shit
-            // todo: if condition doesn't work properly
-            .pipe(plugins.gulpif(
-                    options.env === 'production',
+            // optimize only on production
+            .pipe(plugins.gulpif(envCondition,
                 plugins.imagemin({
                     optimizationLevel: 3,
                     interlaced: true,

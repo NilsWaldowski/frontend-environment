@@ -1,4 +1,4 @@
-module.exports = function(gulp, plugins, options) {
+module.exports = function(gulp, plugins, options, envCondition) {
     return function() {
 
         /**
@@ -17,10 +17,8 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.jscs())
             .pipe(plugins.jscs.reporter())
 
-            // todo: if condition doesn't work properly
-            .pipe(plugins.gulpif(
-                    options.env === 'production',
-                // fail if error found
+            // fail if error found
+            .pipe(plugins.gulpif(envCondition,
                 plugins.jscs.reporter('fail')
                 )
             )
@@ -37,10 +35,11 @@ module.exports = function(gulp, plugins, options) {
          * build enhancement js
          */
         gulp.src(options.dirs.src.js_enhance + '/**/*.js')
-            // todo: if condition doesn't work properly
-            .pipe(plugins.gulpif(
-                    options.env === 'production',
-                plugins.rename({suffix: '.min'}),
+            .pipe(plugins.gulpif(envCondition,
+                plugins.rename({suffix: '.min'})
+                )
+            )
+            .pipe(plugins.gulpif(envCondition,
                 plugins.uglify()
                 )
             )

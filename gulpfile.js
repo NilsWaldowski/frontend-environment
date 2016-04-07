@@ -30,6 +30,12 @@ options.dirs = JSON.parse(fs.readFileSync('./gulp/config/dirs.json'));
 // set dest to environment (production or development) to get the specific path settings
 options.dirs.dest = options.dirs[options.env].dest;
 
+var envCondition = function(file) {
+    if (options.env === 'production') {
+        return true;
+    }
+};
+
 /**
  * Clean up Task: delete everything in the dest folders
  */
@@ -52,7 +58,7 @@ gulp.task('clean-production', function(cb) {
  * http://macr.ae/article/splitting-gulpfile-multiple-files.html
  */
 function getTask(task) {
-    return require('./gulp/' + task)(gulp, plugins, options);
+    return require('./gulp/' + task)(gulp, plugins, options, envCondition);
 }
 
 /** Browser Sync */

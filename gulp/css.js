@@ -1,4 +1,4 @@
-module.exports = function(gulp, plugins, options) {
+module.exports = function(gulp, plugins, options, envCondition) {
 
     var postCssProcessors = [
         plugins.imageinliner({
@@ -16,8 +16,6 @@ module.exports = function(gulp, plugins, options) {
             'Safari >= 7'
         )
     ];
-
-    console.log(options.dirs.patternlab.public);
 
     return function() {
         gulp.src(options.dirs.src.scss + '/**/*.scss')
@@ -49,13 +47,13 @@ module.exports = function(gulp, plugins, options) {
             // write sourcemaps
             //.pipe(plugins.sourcemaps.write({includeContent: false, sourceRoot: '.'}))
 
-            // todo: if condition doesn't work properly
             // only on production
-            .pipe(plugins.gulpif(
-                    options.env === 'production',
-                plugins.rename({suffix: '.min'}),
-                plugins.minifycss({noAdvanced: true})
-                )
-                .pipe(gulp.dest(options.dirs.dest.css)));
+            .pipe(plugins.gulpif(envCondition,
+                plugins.rename({suffix: '.min'})
+            ))
+            .pipe(plugins.gulpif(envCondition,
+                plugins.minifycss()
+            ))
+            .pipe(gulp.dest(options.dirs.dest.css));
     };
 };
