@@ -9,8 +9,6 @@
         "html5shiv": "~3.7",
         "fastclick": "~1.0",
         "requirejs": "~2.1",
-        "normalize-css": "~4.0.0",
-        "sassline": "~2.1.2",
-        "baseline": "https://github.com/daneden/Baseline.js/archive/master.zip"
+        "normalize-css": "~4.0.0"
     }
 }
