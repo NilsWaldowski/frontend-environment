@@ -23,9 +23,7 @@ module.exports = function(gulp, plugins, options, envCondition) {
             // lint
             .pipe(plugins.scsslint())
 
-            // init sourcemaps
-            // todo: fix sourcemaps
-            //.pipe(plugins.sourcemaps.init())
+            .pipe(plugins.sourcemaps.init())
 
             // compile scss files
             .pipe(plugins.sass({
@@ -41,11 +39,15 @@ module.exports = function(gulp, plugins, options, envCondition) {
 
             .pipe(plugins.postcss(postCssProcessors))
 
-            // optimize css files
-            .pipe(plugins.cmq({log: false}))
+            .pipe(plugins.sourcemaps.init({loadMaps: true}))
 
-            // write sourcemaps
-            //.pipe(plugins.sourcemaps.write({includeContent: false, sourceRoot: '.'}))
+            .pipe(plugins.gulpif(envCondition,
+                // if production = combine media queries
+                plugins.cmq({log: false}),
+
+                // if development = write sourcempas
+                plugins.sourcemaps.write('./')
+            ))
 
             // only on production
             .pipe(plugins.gulpif(envCondition,
