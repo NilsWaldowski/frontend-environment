@@ -1,3 +1,5 @@
+# Start a Project
+
 Adjustments to be done:
 
 core/source/_data/_data.json
@@ -39,8 +41,26 @@ use following commands in a second terminal window:
 use following commands in a third terminal window:
 
 6.) "gulp icons" + "gulp img-dev" + "gulp img-edit" or "gulp images" (combines the first three tasks)
-	Browser sync
+
 ------------------------------------------------------------------------------------------------------------------------
 
-7.) "gulp deploy"
-	If you wish to deploy your changes in prototype to sitepackage extension use this command.
+# Deployment and Node Environment Variables
+
+TODO: development/production handling
+Windows:    SET NODE_ENV=development
+OSX/Linux:  export NODE_ENV=development
+
+gulp task --env development
+gulp task --env production
+
+
+# SASS Directory / Files
+
+* 0-settings: Global variables, site-wide settings, config switches, etc.
+* 1-utilities: Site-wide mixins and functions.
+* 2-generic: Low-specificity, far-reaching rulesets (e.g. resets).
+* 3-base: Unclassed HTML elements (e.g. a {}, blockquote {}, address {}).
+* 4-objects: Objects, abstractions, and design patterns (e.g. .media {}).
+* 5-components: Discrete, complete chunks of UI (e.g. .carousel {}). This is the one layer that inuitcss doesn’t get involved with.
+* 6-helpers: Helper classes (e.g. .clearfix {}).
+* 6-trumps: High-specificity, very explicit selectors. Overrides and helper classes (e.g. .hidden {}).

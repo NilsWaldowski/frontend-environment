@@ -1,11 +1,9 @@
-var dirs = require('./config/dirs.json');
+module.exports = function(gulp, plugins, options) {
+    return function() {
+        gulp.src('', {read: false})
 
-module.exports = function (gulp, plugins) {
-	return function () {
-		gulp.src('', {read: false})
-
-			.pipe(plugins.shell([
-				'php core/builder.php -p -n -w'
-			]));
-	};
+            .pipe(plugins.shell([
+                'php core/builder.php -p -n -w'
+            ]));
+    };
 };

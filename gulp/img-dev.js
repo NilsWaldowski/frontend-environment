@@ -1,9 +1,23 @@
-var dirs = require('./config/dirs.json');
+module.exports = function(gulp, plugins, options) {
+    return function() {
+        gulp.src(options.dirs.src.img + '/**/*')
 
-module.exports = function (gulp, plugins) {
-	return function () {
-		gulp.src(dirs.src.src_img + '/**/*')
+            // only on production minify that shit
+            // todo: if condition doesn't work properly
+            .pipe(plugins.gulpif(
+                    options.env === 'production',
+                plugins.imagemin({
+                    optimizationLevel: 3,
+                    interlaced: true,
+                    progressive: true,
+                    use: [plugins.pngquant({
+                        quality: '80-85',
+                        speed: 6
+                    })]
+                })
+                )
+            )
 
-			.pipe(gulp.dest(dirs.pl_dest.pl_public_images));
-	};
+            .pipe(gulp.dest(options.dirs.dest.images));
+    };
 };

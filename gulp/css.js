@@ -1,26 +1,61 @@
-var dirs = require('./config/dirs.json');
+module.exports = function(gulp, plugins, options) {
 
-module.exports = function (gulp, plugins) {
-	return function () {
-		gulp.src(dirs.src.src_scss + '/**/*.scss')
+    var postCssProcessors = [
+        plugins.imageinliner({
+            assetPaths: [options.dirs.patternlab.public],
+            maxFileSize: 10240
+        }),
+        plugins.autoprefixer(
+            '> 1% in DE',
+            'Android >= 4.1',
+            'Explorer >= 8',
+            'Firefox >= 17',
+            'iOS >= 6',
+            'last 4 versions',
+            'Opera >= 12.1',
+            'Safari >= 7'
+        )
+    ];
 
-			// compile scss files
-			.pipe(plugins.sass({
-				style: 'expanded'
-			}))
+    console.log(options.dirs.patternlab.public);
 
-			// don't stop the watcher if something goes wrong
-			.on("error", function handleError(err) {
-				console.log(err.toString());
-				this.emit('end');
-			})
+    return function() {
+        gulp.src(options.dirs.src.scss + '/**/*.scss')
 
-			.pipe(plugins.autoprefixer('last 2 version', 'safari 5', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
+            // lint
+            .pipe(plugins.scsslint())
 
-			// optimize css files
-			.pipe(plugins.cmq({log: false}))
+            // init sourcemaps
+            // todo: fix sourcemaps
+            //.pipe(plugins.sourcemaps.init())
 
-			// write the optimized versions
-			.pipe(gulp.dest(dirs.pl_dest.pl_public_css));
-	};
+            // compile scss files
+            .pipe(plugins.sass({
+                style: 'expanded',
+                includePaths: ['FeSource/Vendor']
+            }))
+
+            // don't stop the watcher if something goes wrong
+            .on("error", function handleError(err) {
+                console.log(err.toString());
+                this.emit('end');
+            })
+
+            .pipe(plugins.postcss(postCssProcessors))
+
+            // optimize css files
+            .pipe(plugins.cmq({log: false}))
+
+            // write sourcemaps
+            //.pipe(plugins.sourcemaps.write({includeContent: false, sourceRoot: '.'}))
+
+            // todo: if condition doesn't work properly
+            // only on production
+            .pipe(plugins.gulpif(
+                    options.env === 'production',
+                plugins.rename({suffix: '.min'}),
+                plugins.minifycss({noAdvanced: true})
+                )
+                .pipe(gulp.dest(options.dirs.dest.css)));
+    };
 };
