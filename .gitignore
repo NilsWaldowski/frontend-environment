@@ -1,12 +1,52 @@
+# Remove this line in order to commit your changes in the "/source" directory.
+/source
+
+#
+# Ignore Projects specific files & folders.
+#
 *.log
 *.gz
-
 .idea
 logs
 npm-debug.log
 node_modules
-public
-/source
 config/config.ini
 /FeSource/Vendor
 /FeSource/Javascript/Build
+
+#
+# Ignore OS specific system files (Thumbs.db, .DS_Store, etc.)
+#
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# OSX system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Linux system files
+.fuse_hidden*
+.directory
+.Trash-*
