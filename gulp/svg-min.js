@@ -1,17 +1,26 @@
 module.exports = function(gulp, plugins, options) {
+
+    var imageminConf = options.config.imagemin;
+
+    var sizeConf = options.config.size;
+
     return function() {
+
         gulp.src(options.dirs.src.icons + '/**/*.svg')
 
-            .pipe(plugins.size({
-                showFiles: true
-            }))
+            /** Check for identical files and skip those */
+            .pipe(plugins.changed(options.dirs.dist.icons))
 
-            .pipe(plugins.svgmin())
+            /** File size before optimization */
+            .pipe(plugins.size(sizeConf))
 
-            .pipe(plugins.size({
-                showFiles: true
-            }))
+            /** Optimize SVGs */
+            .pipe(plugins.imagemin(imageminConf))
 
-            .pipe(gulp.dest(options.dirs.dest.icons));
+            /** File size after optimization */
+            .pipe(plugins.size(sizeConf))
+
+            /** Write */
+            .pipe(gulp.dest(options.dirs.dist.icons));
     };
 };

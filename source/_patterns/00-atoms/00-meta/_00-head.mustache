@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie ie6 lte9 lte8 lte7 no-js" lang="de"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie ie7 lte9 lte8 lte7 no-js" lang="de"> <![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8 lte9 lte8 no-js" lang="de"> <![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9 lte9 no-js" lang="de"> <![endif]-->
+<!--[if gt IE 9]>
+<html class="no-js" lang="de"> <![endif]-->
+<!--[if !IE]><!-->
+<html class="no-js" lang="de"><!--<![endif]-->
+<head>
+	<title>{{ title }}</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Begin Pattern Lab (Required for Pattern Lab to run properly) -->
+	{% pattern-lab-head %}
+	<!-- End Pattern Lab -->
+
+	<meta name="fullcss" content="{{ css.src }}">
+
+	<!-- DEVELOPMENT: RequireJS includes all necessary Modules -->
+	<meta name="fulljs" content="{{ js.compiled_production }}">
+
+	<!-- PRODUCTION: we build with gulp a single file which contains als necessary modules within -->
+	<!-- meta name="fulljs" content="{{ js.compiled_production }}" -->
+
+	<!-- ENHANCEMENT JS - will be included inline in the CMS -->
+	<script src="{{ js.enhancement }}"></script>
+
+	<meta name="fonts" content="{{ fonts.src }}">
+
+	<!--#if expr="$HTTP_COOKIE=/fullcss\=true/" -->
+	<link rel="stylesheet" href="{{ css.src }}">
+	<!--#else -->
+
+	<!--#if expr="$HTTP_COOKIE=/fonts\=true/" -->
+	<link rel="stylesheet" href="{{ fonts.src }}">
+	<!--#else -->
+
+	<noscript>
+		<link rel="stylesheet" href="{{ css.src }}">
+		<link rel="stylesheet" href="{{ fonts.src }}">
+	</noscript>
+	<!--#endif -->
+
+	<!--[if lt IE 9]>
+	<script src="{{ js.html5shiv }}"></script>
+	<![endif]-->
+
+</head>
+<body class="{{ bodyClass }}">

@@ -18,5 +18,9 @@
     "quotmark": "single",
     "strict": true,
     "undef": true,
-    "unused": "vars"
+    "unused": "vars",
+    "globals": {
+        "$": false,
+        "jQuery": false
+    }
 }

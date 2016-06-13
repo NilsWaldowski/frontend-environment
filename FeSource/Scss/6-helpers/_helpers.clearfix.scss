@@ -1,4 +1,3 @@
-.#{$prefix}clearfix,
-%#{$prefix}clearfix {
+.h-clearfix {
     @include clearfix;
 }

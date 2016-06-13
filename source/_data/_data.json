@@ -1,0 +1,60 @@
+{
+	"title": "CPS-IT Pattern Lab",
+	"css": {
+		"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css/screen.css"
+	},
+	"js": {
+		"compiled": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/javascript.js",
+		"compiled_production": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript/javascript.min.js",
+		"enhancement": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement/progressive.enhancement.js",
+		"html5shiv": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement/html5shiv.js"
+	},
+	"fonts": {
+		"src": "http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister"
+	},
+	"bodyClass": "bodyClass",
+	"img": {
+		"logo": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images/logo.png",
+			"alt": "Logo"
+		},
+		"favicon-16x16": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images/favicon.ico"
+		},
+		"loader": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images/loader.gif",
+			"alt": "Loading Spinner"
+		},
+		"landscape-4x3": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial/_testImages/img_4x3_600x450.png",
+			"alt": "4x3 Image"
+		},
+		"landscape-16x9": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial/_testImages/img_16x9_1280x720.png",
+			"alt": "16x9 Image"
+		},
+		"square": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial/_testImages/img_1x1_600x600.png",
+			"alt": "Square Image"
+		},
+		"content": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial/_testImages/img_16x9_1280x720.png",
+			"alt": "TYPO3 Content Image"
+		},
+		"avatar": {
+			"src": "/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial/_testImages/img_1x1_300x300.png",
+			"alt": "Manfred Mustermann"
+		}
+	},
+	"headline": {
+		"short": "Lorem ipsum dolor sit (37 characters)",
+		"medium": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. (72 characters)"
+	},
+	"bodytext": {
+		"short": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+		"medium": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+		"long": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+	},
+	"description": "So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.",
+	"url": "#"
+}

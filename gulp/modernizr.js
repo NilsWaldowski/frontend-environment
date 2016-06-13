@@ -1,5 +1,7 @@
 module.exports = function(gulp, plugins, options) {
+
     return function() {
+
         var stream = gulp.src([options.dirs.src.js + '/**/*.js'])
 
             .pipe(plugins.modernizr({
@@ -8,7 +10,7 @@ module.exports = function(gulp, plugins, options) {
                 "cache" : true,
 
                 // Path to save out the built file
-                "dest" : options.dirs.src.js_build + '/modernizr.custom.js',
+                "dest" : options.dirs.src.js_enhance + '/modernizr.custom.js',
 
                 "options" : [
                     "setClasses",

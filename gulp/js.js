@@ -1,60 +1,72 @@
-module.exports = function(gulp, plugins, options, envCondition) {
+module.exports = function(gulp, plugins, options) {
+
+    /** Rename */
+    var renameConf = options.config.rename;
+
     return function() {
 
-        /**
-         * build js (main.js, config.js & /modules directory)
-         */
-        gulp.src([
-            options.dirs.src.js + '/**/*.js',
-            '!'+options.dirs.src.js + '/Build/*.js'
-            ])
+        gulp.src(options.dirs.src.js + '/**/*.js')
 
-            // use jshint
+            /** JSHint */
             .pipe(plugins.jshint())
-            .pipe(plugins.jshint.reporter('default'))
+            .pipe(plugins.jshint.reporter())
 
-            // use jslint
+            /** JSLint */
             .pipe(plugins.jscs())
             .pipe(plugins.jscs.reporter())
 
-            // fail if error found
-            .pipe(plugins.gulpif(envCondition,
-                plugins.jscs.reporter('fail')
-                )
-            )
+            /** Include required modules/bower_components */
+            .pipe(plugins.include())
+            .on('error', console.log)
 
-            .pipe(gulp.dest(options.dirs.dest.js));
+            /** Write */
+            .pipe(gulp.dest(options.dirs.dist.js))
 
-        /**
-         * write /Build directory (not included in hint/lint process)
-         */
-        gulp.src([options.dirs.src.js + '/Build/*.js'])
-            .pipe(gulp.dest(options.dirs.dest.js + '/Build'));
+            /** Rename for Production */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.rename(renameConf)
+            ))
+
+            /** Fail to build production files if jshint find anything */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.jshint.reporter('fail')
+            ))
+
+            /** Minify JS */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.uglify()
+            ))
+
+            /** Write minified files */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                gulp.dest(options.dirs.dist.js)
+            ));
 
         /**
          * build enhancement js
          */
         gulp.src(options.dirs.src.js_enhance + '/**/*.js')
-            .pipe(plugins.gulpif(envCondition,
-                plugins.rename({suffix: '.min'})
-                )
-            )
-            .pipe(plugins.gulpif(envCondition,
+
+            /** Write */
+            .pipe(gulp.dest(options.dirs.dist.js_enhance))
+
+            /** Rename for Production */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.rename(renameConf)
+            ))
+
+            /** Minify JS */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
                 plugins.uglify()
-                )
-            )
-            .pipe(gulp.dest(options.dirs.dest.js_enhance));
+            ))
 
-        /**
-         * venodr js (generated from bower)
-         */
-        gulp.src([options.dirs.src.js_vendor + '/**/*.js'])
-            .pipe(gulp.dest(options.dirs.dest.js_vendor));
-
-        /**
-         * additional JS (which needs to be integrated inline through CMS)
-         * todo: how to handle additional JS with a requireJS setup?xw
-         */
-
+            /** Write minified files */
+            .pipe(gulp.dest(options.dirs.dist.js_enhance));
     };
 };

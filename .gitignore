@@ -1,6 +1,3 @@
-# Remove this line in order to commit your changes in the "/source" directory.
-/source
-
 #
 # Ignore Projects specific files & folders.
 #
@@ -11,8 +8,8 @@ logs
 npm-debug.log
 node_modules
 config/config.ini
-/FeSource/Vendor
-/FeSource/Javascript/Build
+bower_components
+FeSource/javascriptEnhancement/modernizr.custom.js
 
 #
 # Ignore OS specific system files (Thumbs.db, .DS_Store, etc.)

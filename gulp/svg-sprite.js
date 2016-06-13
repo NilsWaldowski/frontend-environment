@@ -1,25 +1,23 @@
 module.exports = function(gulp, plugins, options) {
-    var conf = {
-        shape               : {
-            dimension       : {         // Set maximum dimensions
-                maxWidth    : 32,
-                maxHeight   : 32,
-                attributes  : true
-            }
-        },
-        mode                : {
-            symbol          : {         // Activate the «symbol» mode
-                dest        : '',
-                sprite      : 'sprite.svg'
-            }
-        }
-    };
+
+    var svgSpriteConf = options.config.svgSprite;
+
+    var imageminConf = options.config.imagemin;
 
     return function() {
+
         gulp.src(options.dirs.src.icons + '/**/*.svg')
 
-            .pipe(plugins.svgSprite(conf))
-            
-            .pipe(gulp.dest(options.dirs.dest.icons + '/Sprite'));
+            /** Check for identical files and skip those */
+            .pipe(plugins.changed(options.dirs.dist.icons + '/sprite'))
+
+            /** Optimize SVGs */
+            .pipe(plugins.imagemin(imageminConf))
+
+            /** create sprite file */
+            .pipe(plugins.svgSprite(svgSpriteConf))
+
+            /** Write */
+            .pipe(gulp.dest(options.dirs.dist.icons + '/sprite'));
     };
 };

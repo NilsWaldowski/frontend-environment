@@ -1,61 +1,67 @@
-module.exports = function(gulp, plugins, options, envCondition) {
+module.exports = function(gulp, plugins, options) {
 
-    var postCssProcessors = [
-        plugins.imageinliner({
-            assetPaths: [options.dirs.patternlab.public],
-            maxFileSize: 10240
-        }),
-        plugins.autoprefixer(
-            '> 1% in DE',
-            'Android >= 4.1',
-            'Explorer >= 8',
-            'Firefox >= 17',
-            'iOS >= 6',
-            'last 4 versions',
-            'Opera >= 12.1',
-            'Safari >= 7'
-        )
+    /**
+     * Pleeease
+     * Load defaults and dynamic data (production & development)
+     */
+    var pleaseConf = options.config.pleeease;
+
+    /** PostCSS */
+    var postCssConf = [
+        plugins.imageinliner(options.config.postCss.imageinliner),
+        plugins.flexibility()
     ];
 
-    return function() {
-        gulp.src(options.dirs.src.scss + '/**/*.scss')
+    /** Rename */
+    var renameConf = options.config.rename;
 
-            // lint
+    /** SASS */
+    var sassConf = options.config.sass;
+
+    return function() {
+
+        gulp.src([
+            options.dirs.src.scss + '/**/*.scss',
+            '!' + options.dirs.src.scss + '/8-vendor/**/*.scss'])
+
+            /** Lint SCSS */
             .pipe(plugins.scsslint())
 
-            .pipe(plugins.sourcemaps.init())
-
-            // compile scss files
-            .pipe(plugins.sass({
-                style: 'expanded',
-                includePaths: ['FeSource/Vendor']
-            }))
-
-            // don't stop the watcher if something goes wrong
-            .on("error", function handleError(err) {
-                console.log(err.toString());
-                this.emit('end');
-            })
-
-            .pipe(plugins.postcss(postCssProcessors))
-
-            .pipe(plugins.sourcemaps.init({loadMaps: true}))
-
-            .pipe(plugins.gulpif(envCondition,
-                // if production = combine media queries
-                plugins.cmq({log: false}),
-
-                // if development = write sourcempas
-                plugins.sourcemaps.write('./')
+            /** Fail to build production files if scsslint find anything */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.scsslint.failReporter()
             ))
 
-            // only on production
-            .pipe(plugins.gulpif(envCondition,
-                plugins.rename({suffix: '.min'})
+            /** Compile SCSS to CSS */
+            .pipe(plugins.sass(sassConf))
+
+            /** Error handling */
+            .on("error", plugins.util.log)
+
+            /** Pleeease */
+            .pipe(plugins.pleeease(pleaseConf))
+
+            /** PostCss */
+            .pipe(plugins.postcss(postCssConf))
+
+            /** Write */
+            .pipe(gulp.dest(options.dirs.dist.css))
+
+            /** Rename for Production */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.rename(renameConf)
             ))
-            .pipe(plugins.gulpif(envCondition,
-                plugins.minifycss()
+
+            /** Minify CSS */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.cleanCss()
             ))
-            .pipe(gulp.dest(options.dirs.dest.css));
+
+            /** Write minified files */
+            .pipe(gulp.dest(options.dirs.dist.css));
+
     };
 };

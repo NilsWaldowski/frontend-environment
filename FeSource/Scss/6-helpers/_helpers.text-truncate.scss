@@ -1,4 +1,3 @@
-.#{$prefix}text-truncate,
-%#{$prefix}text-truncate {
+.h-text-truncate {
     @include text-truncate;
 }
