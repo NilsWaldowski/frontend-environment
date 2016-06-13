@@ -1,0 +1,30 @@
+/*------------------------------------*\
+    Configuration of Susy
+\*------------------------------------*/
+$susy: (
+    flow: ltr,
+    math: fluid,
+    output: float,
+    gutter-position: inside-static,
+    container: 100%,
+    container-position: center,
+    columns: 12,
+    column-width: 96px,
+    gutter: 12px/96px,
+    global-box-sizing: border-box,
+    last-flow: to,
+    debug: (
+        image: false,
+        color: rgba(#66f, .25),
+        output: background,
+        //output: overlay, -> toggle overlay
+        toggle: top right,
+    ),
+    use-custom: (
+        background-image: true,
+        background-options: false,
+        box-sizing: true,
+        clearfix: false,
+        rem: true,
+    )
+);
