@@ -8,7 +8,6 @@ logs
 npm-debug.log
 node_modules
 config/config.ini
-bower_components
 public
 FeSource/javascriptEnhancement/modernizr.custom.js
 

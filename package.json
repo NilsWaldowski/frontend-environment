@@ -40,6 +40,13 @@
         "gulp-modernizr": "^1.0.0-alpha",
 
         "gulp-jscs": "^3.0.2",
-        "gulp-jshint": "^2.0.0"
+        "gulp-jshint": "^2.0.0",
+
+        "jquery": "^2.2",
+        "svg4everybody": "^2.0",
+        "html5shiv": "^3.7",
+        "fastclick": "^1.0",
+        "normalize-css": "^2.3",
+        "susy": "^2.2"
     }
 }

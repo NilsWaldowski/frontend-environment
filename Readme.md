@@ -8,7 +8,6 @@ and a build/deploy setup for a live environment.
 
 * [Patternlab](http://patternlab.io/)
 * [Gulp](http://gulpjs.com/)
-* [Bower](https://bower.io/)
 * [Browsersync](https://www.browsersync.io/)
 * [JSHint](http://jshint.com/)
 * [JSCS](http://jscs.info/)

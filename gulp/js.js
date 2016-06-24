@@ -15,7 +15,7 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.jscs())
             .pipe(plugins.jscs.reporter())
 
-            /** Include required modules/bower_components */
+            /** Include required modules/node_modules */
             .pipe(plugins.include())
             .on('error', console.log)
 

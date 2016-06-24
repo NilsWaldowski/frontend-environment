@@ -1,7 +1,7 @@
-/** Require bower_components */
-//=require ../bower_components/jquery/dist/jquery.js
-//=require ../bower_components/svg4everybody/dist/svg4everybody.js
-//=require ../bower_components/fastclick/lib/fastclick.js
+/** Require node_modules */
+//=require ../../node_modules/jquery/dist/jquery.js
+//=require ../../node_modules/svg4everybody/dist/svg4everybody.js
+//=require ../../node_modules/fastclick/lib/fastclick.js
 
 /** Require own modules */
 //=require modules/modulePatternVorlage.js
