@@ -105,7 +105,7 @@ gulp.task('default', ['watch', 'browser-sync']);
 
 /** Init */
 gulp.task('init', function() {
-    options.env = 'production';
+    //options.env = 'production';
 
     gulp.start(
         'css',
