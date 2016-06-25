@@ -52,10 +52,6 @@ gulp.task('clean-deploy', function() {
 });
 
 
-/** Copy */
-gulp.task('copy', getTask('copy'));
-
-
 /** CSS */
 gulp.task('css', getTask('css'));
 
