@@ -20,8 +20,14 @@
         "icons": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons",
 
         "deploy": {
-            "base": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/",
-            "fileadminImages": "../httpdocs/fileadmin/PreparedImages"
+            "base": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default",
+            "css": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Css",
+            "js": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Javascript",
+            "js_enhance": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement",
+            "fonts": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Fonts",
+            "images": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images",
+            "imagesEditorial": "../httpdocs/fileadmin/PreparedImages",
+            "icons": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons"
         }
     },
     "patternlab": {

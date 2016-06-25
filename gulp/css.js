@@ -48,6 +48,12 @@ module.exports = function(gulp, plugins, options) {
             /** Write */
             .pipe(gulp.dest(options.dirs.dist.css))
 
+            /** Write in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.css)
+            ))
+
             /** Rename for Production */
             .pipe(plugins.gulpif(
                 options.env === 'production',
@@ -61,7 +67,13 @@ module.exports = function(gulp, plugins, options) {
             ))
 
             /** Write minified files */
-            .pipe(gulp.dest(options.dirs.dist.css));
+            .pipe(gulp.dest(options.dirs.dist.css))
+
+            /** Write minified files in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.css)
+            ));
 
     };
 };

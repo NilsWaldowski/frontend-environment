@@ -14,7 +14,13 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.imagemin(imageminConf))
 
             /** Write */
-            .pipe(gulp.dest(options.dirs.dist.images));
+            .pipe(gulp.dest(options.dirs.dist.images))
+
+            /** Write in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.images)
+            ));
 
 
         /** Images for Editorials/CMS */
@@ -27,6 +33,12 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.imagemin(imageminConf))
 
             /** Write */
-            .pipe(gulp.dest(options.dirs.dist.imagesEditorial));
+            .pipe(gulp.dest(options.dirs.dist.imagesEditorial))
+
+            /** Write in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.imagesEditorial)
+            ));
     };
 };

@@ -11,9 +11,21 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.jshint())
             .pipe(plugins.jshint.reporter())
 
+            /** Fail to build production files if jshint find anything */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.jshint.reporter('fail')
+            ))
+
             /** JSLint */
             .pipe(plugins.jscs())
             .pipe(plugins.jscs.reporter())
+
+            /** Fail to build production files if jshint find anything */
+            .pipe(plugins.gulpif(
+                options.env === 'production',
+                plugins.jscs.reporter('fail')
+            ))
 
             /** Include required modules/node_modules */
             .pipe(plugins.include())
@@ -21,6 +33,12 @@ module.exports = function(gulp, plugins, options) {
 
             /** Write */
             .pipe(gulp.dest(options.dirs.dist.js))
+
+            /** Write in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.js)
+            ))
 
             /** Rename for Production */
             .pipe(plugins.gulpif(
@@ -44,6 +62,12 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.gulpif(
                 options.env === 'production',
                 gulp.dest(options.dirs.dist.js)
+            ))
+
+            /** Write minified files in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.js)
             ));
 
         /**
@@ -53,6 +77,12 @@ module.exports = function(gulp, plugins, options) {
 
             /** Write */
             .pipe(gulp.dest(options.dirs.dist.js_enhance))
+
+            /** Write in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.js_enhance)
+            ))
 
             /** Rename for Production */
             .pipe(plugins.gulpif(
@@ -67,6 +97,12 @@ module.exports = function(gulp, plugins, options) {
             ))
 
             /** Write minified files */
-            .pipe(gulp.dest(options.dirs.dist.js_enhance));
+            .pipe(gulp.dest(options.dirs.dist.js_enhance))
+
+            /** Write minified files in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.js_enhance)
+            ));
     };
 };

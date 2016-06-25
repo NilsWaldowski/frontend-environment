@@ -105,7 +105,6 @@ gulp.task('default', ['watch', 'browser-sync']);
 
 /** Init */
 gulp.task('init', function() {
-    //options.env = 'production';
 
     gulp.start(
         'css',
@@ -122,16 +121,22 @@ gulp.task('init', function() {
     });
 });
 
-
 /** Write Deploy (i.e. to typo3 Extension) */
 gulp.task('deploy', ['clean-deploy'], function() {
+    options.env = 'production';
+    options.deploy = true;
 
     gulp.start(
-        'copy'
+        'css',
+        'js',
+        'modernizr',
+        'fonts',
+        'images',
+        'icons'
     );
 
     notifier.notify({
-        title: 'Deployment Task Complete My Master!',
+        title: 'Deploy Task Complete My Master!',
         message: 'Have A Nice Day!'
     });
 });

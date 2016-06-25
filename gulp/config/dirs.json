@@ -21,7 +21,13 @@
 
         "deploy": {
             "base": "../deployDir/dist",
-            "fileadminImages": "../deployDir/PreparedImages"
+            "css": "../deployDir/css",
+            "js": "../deployDir/javascript",
+            "js_enhance": "../deployDir/javascriptEnhancement",
+            "fonts": "../deployDir/fonts",
+            "images": "../deployDir/images",
+            "fileadminImages": "../deployDir/preparedImages",
+            "icons": "../deployDir/icons"
         }
     },
     "patternlab": {

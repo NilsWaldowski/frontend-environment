@@ -18,6 +18,12 @@ module.exports = function(gulp, plugins, options) {
             .pipe(plugins.svgSprite(svgSpriteConf))
 
             /** Write */
-            .pipe(gulp.dest(options.dirs.dist.icons + '/sprite'));
+            .pipe(gulp.dest(options.dirs.dist.icons + '/sprite'))
+
+            /** Write in deploy path */
+            .pipe(plugins.gulpif(
+                options.deploy === true,
+                gulp.dest(options.dirs.dist.deploy.icons + '/sprite')
+            ));
     };
 };
