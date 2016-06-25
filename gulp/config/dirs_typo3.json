@@ -19,7 +19,7 @@
         "imagesEditorial": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial",
         "icons": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons",
 
-        "extern": {
+        "deploy": {
             "base": "../httpdocs/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/",
             "fileadminImages": "../httpdocs/fileadmin/PreparedImages"
         }

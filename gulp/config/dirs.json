@@ -19,9 +19,9 @@
         "imagesEditorial": "public/dist/imagesEditorial",
         "icons": "public/dist/icons",
 
-        "extern": {
-            "base": "../externalDir/dist",
-            "fileadminImages": "../externalDir/PreparedImages"
+        "deploy": {
+            "base": "../deployDir/dist",
+            "fileadminImages": "../deployDir/PreparedImages"
         }
     },
     "patternlab": {

@@ -47,8 +47,8 @@ gulp.task('clean-intern', function() {
     return del([options.dirs.dist.intern.base + '/**/*'], {force: true});
 });
 
-gulp.task('clean-extern', function() {
-    return del([options.dirs.dist.extern.base + '/**/*'], {force: true});
+gulp.task('clean-deploy', function() {
+    return del([options.dirs.dist.deploy.base + '/**/*'], {force: true});
 });
 
 
@@ -124,7 +124,7 @@ gulp.task('init', function() {
 
 
 /** Write Deploy (i.e. to typo3 Extension) */
-gulp.task('deploy', ['clean-extern'], function() {
+gulp.task('deploy', ['clean-deploy'], function() {
 
     gulp.start(
         'copy'

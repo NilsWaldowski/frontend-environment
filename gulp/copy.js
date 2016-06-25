@@ -11,7 +11,7 @@ module.exports = function(gulp, plugins, options) {
             ])
 
             /** Write */
-            .pipe(gulp.dest(options.dirs.dist.extern.base));
+            .pipe(gulp.dest(options.dirs.dist.deploy.base));
 
         /**
          * copy only ImagesEditorial
@@ -21,7 +21,7 @@ module.exports = function(gulp, plugins, options) {
             ])
 
             /** Write */
-            .pipe(gulp.dest(options.dirs.dist.extern.fileadminImages));
+            .pipe(gulp.dest(options.dirs.dist.deploy.fileadminImages));
 
     };
 };
