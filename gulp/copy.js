@@ -7,6 +7,7 @@ module.exports = function(gulp, plugins, options) {
          */
         gulp.src([
                 options.dirs.dist.base + '/**/*',
+                '!' + options.dirs.dist.base + '/ImagesEditorial',
                 '!' + options.dirs.dist.base + '/ImagesEditorial/**/*'
             ])
 
