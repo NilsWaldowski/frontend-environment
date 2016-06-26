@@ -25,19 +25,26 @@ and a build/deploy setup for a live environment.
 
 * [Patternlab](http://patternlab.io/)
 * [Gulp](http://gulpjs.com/)
+* [SCSS](http://sass-lang.com/)
+* [PostCSS](http://postcss.org/)
+* [Pleeease](http://pleeease.io/)
+* [Modernizr](https://modernizr.com/)
 * [Browsersync](https://www.browsersync.io/)
 * [JSHint](http://jshint.com/)
 * [JSCS](http://jscs.info/)
 * [SCSSLint](https://github.com/brigade/scss-lint)
 
 ## Local System Dependencies
-* [Node.js](https://nodejs.org/) - [Download and Install](https://nodejs.org/en/download/) and add system path for if necessary
-* [Ruby](https://www.ruby-lang.org/) - [Download and Install](https://www.ruby-lang.org/de/documentation/installation/)
-* [Gulp](http://gulpjs.com/) - `npm install -g gulp-cli` in order to install gulp command line interface
-* [Git](https://git-scm.com/) - [Download and Install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and add system path if necessary
-* [PHP](https://secure.php.net/) - Download and Install [XAMPP](https://www.apachefriends.org/) or a local Apache server and add system path if necessary
 
-## Quick Start
+* [Node.js](https://nodejs.org/) - [Install](https://nodejs.org/en/download/)
+* [Ruby](https://www.ruby-lang.org/) - [Install](https://www.ruby-lang.org/de/documentation/installation/)
+* [Gulp](http://gulpjs.com/) - `npm install -g gulp-cli`
+* [Git](https://git-scm.com/) - [Install](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [PHP](https://secure.php.net/) - Install [XAMPP](https://www.apachefriends.org/) or a local Apache server
+
+Add system paths if necessary.
+
+## Quick Start a Project
 
 * `git clone` Repository
 * `npm install` - install dependencies
@@ -82,7 +89,7 @@ Use environment variables for init/CSS/JS Tasks in order to build additional min
 * 8-vendor: Vendor css/scss e.g. from jQuery plugins
 
 ### JS files and folder
-* javascript.js: contains just imports for vendor files and project specific modules (gulp-include handles the inclusion)
+* javascript.js: contains only imports for vendor files and project specific modules (gulp-include handles the inclusion)
 * modules:
     * contains all project specific js files
     * each file should follow the [module design pattern](https://github.com/NilsWaldowski/module-pattern-bootstrap)
@@ -96,14 +103,15 @@ Use the SVG `use` element to reference an svg icon from the generated sprite fil
 
 ### Images folder
 * Images: fixed images like logos without any editorial purpose
-* ImagesEditorial: contains content images which will be used/changed by editorial stuff later on (those images will
-be deployed in a different path in order to make them available for editors
+* ImagesEditorial: contains content images which will be used/changed by editorial staff later on (those images will
+be deployed in a different path in order to make them available for editors)
 
 ### Vendor
 If you need additional jQuery Plugins, Frameworks or the like from [npm](https://www.npmjs.com/) you can add those
 directly to the package.json file in the devDependencies section:
 
     "devDependencies": {
+        ...
         "jquery": "^2.2",
         "svg4everybody": "^2.0",
         "html5shiv": "^3.7",
