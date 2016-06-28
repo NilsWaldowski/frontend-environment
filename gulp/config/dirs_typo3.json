@@ -16,7 +16,7 @@
         "js_enhance": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/JavascriptEnhancement",
         "fonts": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Fonts",
         "images": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Images",
-        "imagesEditorial": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/ImagesEditorial",
+        "imagesEditorial": "public/fileadmin/PreparedImages",
         "icons": "public/typo3conf/ext/gm7_sitepackage/Resources/Public/_Default/Icons",
 
         "deploy": {
